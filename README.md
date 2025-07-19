@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PDF Toolkit
+
+> Free, secure, in-browser PDF merging, splitting, compression, and text extraction—100% privacy, no uploads on server.  
+> **Developed and maintained by Thirdy Gayares.**
+
+**Live demo**: https://pdf-toolkit.thirdygayares.com
+
+---
+
+## Table of Contents
+
+- [Features](#features)  
+- [Pages](#pages)  
+  - [Home Page](#home-page)  
+  - [Merge PDF](#merge-pdf)  
+  - [Extract Text](#extract-text)  
+- [Getting Started](#getting-started)  
+- [Tech Stack](#tech-stack)  
+- [Contributing](#contributing)  
+- [License](#license)  
+- [About Me](#about-me)  
+- [Legal](#legal)  
+
+---
+
+## Features
+
+- **Merge PDF**: Combine multiple PDFs into one  
+- **Extract Text**: Pull selectable text out of any PDF  
+- **Client-side only**: All processing happens in the browser; we never upload your files  
+- **Unlimited use**: No paywalls, no file-size limits (up to 100 MB per file)  
+
+---
+
+## Pages
+
+### Home Page
+
+Your gateway to all PDF tools and core information about PDF Toolkit.
+
+<img width="1842" height="1178" alt="image" src="https://github.com/user-attachments/assets/50624608-e300-4cc6-8171-cba54e63ae64" />
+
+
+**URL:** `https://pdf-toolkit.thirdygayares.com/`
+
+---
+
+### Merge PDF
+
+Fast, drag-and-drop interface for combining PDFs. Reorder pages, remove what you don’t need, then download your single file.
+
+<img width="1855" height="1066" alt="image" src="https://github.com/user-attachments/assets/67a4948c-f480-47f6-83f4-7a0242b57f01" />
+
+<img width="1828" height="808" alt="image" src="https://github.com/user-attachments/assets/f2115d82-7022-43b7-bc4a-c1ca7c5bb64b" />
+
+
+**URL:** `https://pdf-toolkit.thirdygayares.com/merge-pdf`
+
+---
+
+### Extract Text
+
+Instantly convert any text-based PDF into plain, selectable text. Copy, download, or use the extracted content however you wish.
+
+<img width="1829" height="1193" alt="image" src="https://github.com/user-attachments/assets/5278f6c2-4e07-4d9b-a1e0-c7f2b266b44b" />
+
+
+**URL:** `https://pdf-toolkit.thirdygayares.com/pdf-extract-text`
+
+---
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone this repo**  
+   ```bash
+   git clone https://github.com/thirdygayares/pdf-toolkit.git
+   cd pdf-toolkit
+  ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Install dependencies**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   npm install
+   ```
+3. **Configure your `.env.local`**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   NEXT_PUBLIC_GA_ID=Google Analytics Code
+   ```
+4. **Run in development**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   npm run dev
+   ```
+5. **Build & generate sitemap**
 
-## Learn More
+   ```bash
+   npm run build
+   # (this also runs `next-sitemap` via postbuild)
+   npm start
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* [Next.js](https://nextjs.org) (App Router, Metadata API)
+* [React](https://reactjs.org)
+* [Shadcn](https://ui.shadcn.com/)
+* [Vercel](https://vercel.com/)
+* [Tailwind CSS](https://tailwindcss.com)
+* [Google Analytics (gtag)](https://developers.google.com/analytics)
+* [next-sitemap](https://github.com/iamvishnusankar/next-sitemap) for sitemap & robots.txt
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -m "feat: add YourFeature"`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## About Me
+
+**Thirdy Gayares**
+Passionate developer creating custom solutions for everyone.
+
+* [My Website](https://thirdygayares.com)
+* [Facebook](https://www.facebook.com/thirdygayares.ph)
+* [YouTube](https://www.youtube.com/@thirdygayares)
+* [LinkedIn](https://www.linkedin.com/in/thirdygayares/)
+* [Github](https://github.com/thirdygayares)
+---
+
+## Legal
+
+* [Privacy Policy](https://pdf-toolkit.thirdygayares.com//privacy-policy)
+* [Terms of Service](https://pdf-toolkit.thirdygayares.com//terms-of-service)
+* [Cookie Policy](https://pdf-toolkit.thirdygayares.com//cookie-policy)
+
+---
