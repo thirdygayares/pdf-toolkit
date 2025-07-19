@@ -1,23 +1,25 @@
 "use client"
 
+import { Header } from "@/components/Header"
+import { HeroSection } from "@/components/HeroSection"
+import { ToolsCatalog } from "@/components/ToolsCatalog"
+import { AboutSection } from "@/components/AboutSection"
+import { FAQSection } from "@/components/FAQSection"
+import { Footer } from "@/components/Footer"
 
-
-import {Button} from "@/components/ui/button";
-import {useRouter} from "next/navigation";
-
-export default function HomePage() {
-
-    const router = useRouter();
-
-    const handleGotoMergePdf = () => {
-        router.push("/merge-pdf");
-    };
-
-  return (
-      <div className="min-h-screen flex justify-center place-items-center bg-gray-50">
-          <Button onClick={handleGotoMergePdf}>
-                Go to Merge PDF
-          </Button>
-      </div>
-  )
+const HomePage = () => {
+    return (
+        <div className="min-h-screen bg-background">
+            <Header />
+            <main>
+                <HeroSection />
+                <ToolsCatalog />
+                <AboutSection />
+                <FAQSection />
+            </main>
+            <Footer />
+        </div>
+    )
 }
+
+export default HomePage
