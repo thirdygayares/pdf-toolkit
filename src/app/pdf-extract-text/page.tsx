@@ -9,6 +9,8 @@ import {Features} from "@/app/pdf-extract-text/components/Features";
 import {UploadArea} from "@/app/pdf-extract-text/components/UploadArea";
 import {ErrorAlert} from "@/app/pdf-extract-text/components/ErrorAlert";
 import {ExtractedTextSection} from "@/app/pdf-extract-text/components/ExtractedTextSection";
+import {Header} from "@/components/Header";
+import {Footer} from "@/components/Footer";
 
 const ExtractTextPage: React.FC = () => {
     const { extractedData, isExtracting, error, extractText, clearData } =
@@ -17,6 +19,8 @@ const ExtractTextPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-background">
+            <Header />
+
             <ExtractTextHeader />
 
             <div className="container mx-auto px-4 py-8">
@@ -48,6 +52,7 @@ const ExtractTextPage: React.FC = () => {
                     <ExtractTextFAQ />
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };

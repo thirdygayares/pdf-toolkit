@@ -8,6 +8,8 @@ import {FileManager} from "@/components/FileManager";
 import {DownloadModal} from "@/components/DownloadModal";
 import {toast} from "sonner";
 import {useWarnBeforeCloseRefresh} from "@/hooks/useWarnBeforeCloseRefresh";
+import {Header} from "@/components/Header";
+import {Footer} from "@/components/Footer";
 
 
 export default function HomePage() {
@@ -38,6 +40,7 @@ export default function HomePage() {
 
     return (
         <div className="min-h-screen bg-navy-50">
+            <Header />
             <div className="container mx-auto px-4 py-8">
                 {files.length === 0 ? (
                     <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
@@ -65,6 +68,7 @@ export default function HomePage() {
                     onDownloadComplete={handleDownloadComplete}
                 />
             </div>
+            <Footer />
         </div>
     )
 }
