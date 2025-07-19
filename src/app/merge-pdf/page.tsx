@@ -7,6 +7,7 @@ import {Hero} from "@/app/merge-pdf/components/Hero";
 import {FileManager} from "@/components/FileManager";
 import {DownloadModal} from "@/components/DownloadModal";
 import {toast} from "sonner";
+import {useWarnBeforeCloseRefresh} from "@/hooks/useWarnBeforeCloseRefresh";
 
 
 export default function HomePage() {
@@ -31,6 +32,9 @@ export default function HomePage() {
         setIsDownloadModalOpen(false)
         toast("Files merged and downloaded successfully!")
     }
+
+    useWarnBeforeCloseRefresh(files.length > 0, "You have unsaved uploaded files. Are you sure you want to leave this page?")
+
 
     return (
         <div className="min-h-screen bg-navy-50">
