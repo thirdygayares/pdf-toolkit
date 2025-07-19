@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://pdf-toolkit.thirdygayares.com
+
+# Sitemaps
+Sitemap: https://pdf-toolkit.thirdygayares.com/sitemap.xml
