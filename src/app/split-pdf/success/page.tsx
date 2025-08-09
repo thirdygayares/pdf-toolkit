@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import {useRouter, useSearchParams} from "next/navigation"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { Button } from "@/components/ui/button"
@@ -14,8 +14,9 @@ import {DialogDownloadSplitPdf} from "@/app/split-pdf/success/components/DialogD
 
 export default function SplitSuccessPage(){
     const router = useRouter()
+    const params = useSearchParams()
 
-    const {confirmDownload, open, setOpen,setFilename, result, filename, defaultName} = useSplitPdfDownload();
+    const {confirmDownload, open, setOpen,setFilename, result, filename, defaultName} = useSplitPdfDownload(params);
 
     if (!result) {
         return <NoResult/>

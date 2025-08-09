@@ -1,6 +1,6 @@
 import {base64ToBlob} from "@/lib/base64ToBlob";
 import {useEffect, useMemo, useState} from "react";
-import {useSearchParams} from "next/navigation";
+import {ReadonlyURLSearchParams} from "next/navigation";
 import {toTimestamp} from "@/lib/toTimestamp";
 
 export type SplitResult = {
@@ -9,12 +9,10 @@ export type SplitResult = {
     originalName: string
 }
 
-export const useSplitPdfDownload = () => {
+export const useSplitPdfDownload = (params: ReadonlyURLSearchParams) => {
     const [open, setOpen] = useState(false)
-    const handleDownload = () => setOpen(true)
     const [filename, setFilename] = useState("")
     const [result, setResult] = useState<SplitResult | null>(null)
-    const params = useSearchParams()
 
     const defaultName = useMemo(() => {
         const src = params.get("src") || result?.originalName || "document.pdf"
@@ -58,5 +56,5 @@ export const useSplitPdfDownload = () => {
         }
     }
 
-    return { confirmDownload, open, setOpen, handleDownload, defaultName, result, setResult, filename, setFilename }
+    return { confirmDownload, open, setOpen, defaultName, result, setResult, filename, setFilename }
 }
