@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Upload, FileText, X } from "lucide-react"
 
-interface  Props {
+interface Props {
     onFileReady: (file: File) => void
     hasFile?: boolean
     onReset?: () => void
