@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useExtractText } from "@/hooks/useExtractText";
 
-import { ExtractTextFAQ } from "@/components/faqs/FaqExtractText";
+import {ExtractTextFAQ, ExtractTextFAQS} from "@/components/faqs/FaqExtractText";
 import {ExtractTextHeader} from "@/app/pdf-extract-text/components/Header";
 import {Features} from "@/app/pdf-extract-text/components/Features";
 import {UploadArea} from "@/app/pdf-extract-text/components/UploadArea";
@@ -11,6 +11,7 @@ import {ErrorAlert} from "@/app/pdf-extract-text/components/ErrorAlert";
 import {ExtractedTextSection} from "@/app/pdf-extract-text/components/ExtractedTextSection";
 import {Header} from "@/components/Header";
 import {Footer} from "@/components/Footer";
+import {FAQ} from "@/components/FAQ";
 
 const ExtractTextPage: React.FC = () => {
     const { extractedData, isExtracting, error, extractText, clearData } =
@@ -49,7 +50,14 @@ const ExtractTextPage: React.FC = () => {
                 )}
 
                 <div className="mt-16">
-                    <ExtractTextFAQ />
+                    <FAQ
+                        items={ExtractTextFAQS}
+                        title="❓ FAQ"
+                        description="Common questions about PDF text extraction"
+                        richResults
+                        accordionType="multiple"
+                        collapsible
+                    />
                 </div>
             </div>
             <Footer />

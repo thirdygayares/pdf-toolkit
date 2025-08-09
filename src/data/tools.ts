@@ -30,8 +30,8 @@ export const tools: Tool[] = [
         name: "Split PDF",
         description: "Split large PDF files into smaller, manageable documents.",
         icon: "Scissors",
-        available: false,
-        comingSoon: true,
+        available: true,
+        href: "/split-pdf",
     },
     {
         id: "compress",
