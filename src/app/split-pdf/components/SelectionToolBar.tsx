@@ -9,7 +9,7 @@ interface Props {
     setColumns: (value: 1 | 2 | 3 | 4 | 5) => void;
 }
 
-export const SelectionToolBar = (props: Props)=> {
+export const SelectionToolBar = (props: Props) => {
     const { setAll, invert, columns, setColumns } = props;
     return (
         <div className="flex flex-wrap gap-2 mb-6">
