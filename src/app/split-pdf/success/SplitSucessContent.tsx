@@ -12,7 +12,7 @@ import {useSplitPdfDownload} from "@/app/split-pdf/success/hooks/useSplitPdfDown
 import {DialogDownloadSplitPdf} from "@/app/split-pdf/success/components/DialogDownloadSplitPdf";
 
 
-export const SplitSuccessContent= ()=> {
+export const SplitSuccessContent = () => {
     const router = useRouter()
     const params = useSearchParams()
 
