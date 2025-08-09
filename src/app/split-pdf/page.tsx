@@ -14,6 +14,8 @@ import {useSplitPdf} from "@/app/split-pdf/hooks/useSplitPdf";
 import {SelectionToolBar} from "@/app/split-pdf/components/SelectionToolBar";
 import {PageSelectionHeader} from "@/app/split-pdf/components/PageSelectionHeader";
 import {SplitPdfAction} from "@/app/split-pdf/components/SplitPdfAction";
+import {FAQ} from "@/components/FAQ";
+import {FaqSplitPdf} from "@/components/faqs/FaqSplitPdf";
 
 
 export default function SplitPdfPage() {
@@ -60,7 +62,7 @@ export default function SplitPdfPage() {
                                 columns={columns}
                             />
                             <SplitPdfAction splitPdf={splitPdf} state={state} clearAll={clearAll} />
-
+    
                         </CardContent>
                     </Card>
                 </section>
@@ -68,6 +70,7 @@ export default function SplitPdfPage() {
 
             <div className="mt-12">
                 <Separator className="mb-12" />
+                <FAQ items={FaqSplitPdf} title="❓ FAQ" description="Common questions about PDF splitting" richResults accordionType="multiple" collapsible />
             </div>
             <Footer />
         </div>
