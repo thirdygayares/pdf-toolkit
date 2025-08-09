@@ -6,7 +6,7 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {SplitSuccessContent} from "@/app/split-pdf/success/SplitSucessContent";
 
 
-const LoadingCard= () => {
+const LoadingCard = () => {
     return (
         <Card>
             <CardHeader>
