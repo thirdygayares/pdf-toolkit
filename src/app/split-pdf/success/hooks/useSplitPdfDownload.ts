@@ -1,3 +1,5 @@
+"use client";
+
 import {base64ToBlob} from "@/lib/base64ToBlob";
 import {useEffect, useMemo, useState} from "react";
 import {ReadonlyURLSearchParams} from "next/navigation";
