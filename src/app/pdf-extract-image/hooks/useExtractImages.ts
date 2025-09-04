@@ -19,7 +19,7 @@ export type ExtractState = {
     dedupeByXref: boolean;
 };
 
-export function useExtractImages() {
+export const useExtractImages = () =>{
     const [state, setState] = useState<ExtractState>({
         busy: false,
         error: null,
@@ -31,7 +31,7 @@ export function useExtractImages() {
 
     const selectedCount = useMemo(() => state.items.filter(i => i.selected).length, [state.items]);
 
-    async function extract(file: File) {
+    const extract = async (file: File) => {
         setState(s => ({ ...s, busy: true, error: null, items: [], doc: undefined, totalPages: 0 }));
         try {
             const data = await postExtractImages({
@@ -55,7 +55,7 @@ export function useExtractImages() {
         }
     }
 
-    function reset() {
+    const reset = () => {
         setState({
             busy: false,
             error: null,
@@ -66,42 +66,42 @@ export function useExtractImages() {
         });
     }
 
-    function toggle(name: string) {
+    const toggle = (name: string)=> {
         setState(s => ({
             ...s,
             items: s.items.map(it => (it.name === name ? { ...it, selected: !it.selected } : it)),
         }));
     }
 
-    function setAll(v: boolean) {
+    const setAll = (v: boolean) => {
         setState(s => ({ ...s, items: s.items.map(it => ({ ...it, selected: v })) }));
     }
 
-    function invert() {
+    const invert = () => {
         setState(s => ({ ...s, items: s.items.map(it => ({ ...it, selected: !it.selected })) }));
     }
 
-    function setDedupe(v: boolean) {
+    const setDedupe= (v: boolean) =>{
         setState(s => ({ ...s, dedupeByXref: v }));
     }
 
-    async function downloadSingle(name: string) {
+    const downloadSingle = async (name: string) => {
         const blob = await fetchImageBlob(name);
         triggerDownload(blob, name);
     }
 
-    async function downloadAllZip() {
+    const downloadAllZip = async () => {
         const names = state.items.map(i => i.name);
         await zipAndDownload(names, zipName("all"));
     }
 
-    async function downloadSelectedZip() {
+    const downloadSelectedZip =async ()=> {
         const names = state.items.filter(i => i.selected).map(i => i.name);
         if (names.length === 0) return;
         await zipAndDownload(names, zipName("selected"));
     }
 
-    function zipName(suffix: "all" | "selected") {
+    const zipName = (suffix: "all" | "selected") =>{
         const base = state.doc?.replace(/\.pdf$/i, "") || "document";
         const ts = new Date().toISOString().replace(/[:.]/g, "").slice(0, 15);
         return `${base} images ${suffix} ${ts}.zip`;
@@ -131,7 +131,7 @@ export function useExtractImages() {
     };
 }
 
-function flattenToItems(res: ExtractImagesResponse): ExtractedItem[] {
+const flattenToItems = (res: ExtractImagesResponse): ExtractedItem[] => {
     const out: ExtractedItem[] = [];
     for (const p of res.pages) {
         for (const name of p.images) {
@@ -141,7 +141,7 @@ function flattenToItems(res: ExtractImagesResponse): ExtractedItem[] {
     return out;
 }
 
-function triggerDownload(blob: Blob, filename: string) {
+const triggerDownload = (blob: Blob, filename: string) => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
