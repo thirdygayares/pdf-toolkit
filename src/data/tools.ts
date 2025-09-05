@@ -34,6 +34,14 @@ export const tools: Tool[] = [
         href: "/split-pdf",
     },
     {
+        id: "extract-image",
+        name: "Extract Image",
+        description: "Extract all embedded images from PDFs",
+        icon: "Image",
+        available: false,
+        comingSoon: true,
+    },
+    {
         id: "compress",
         name: "Compress PDF",
         description: "Reduce PDF file size while maintaining quality.",
