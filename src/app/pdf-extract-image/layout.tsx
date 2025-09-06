@@ -1,40 +1,38 @@
-// src/app/split-pdf/layout.tsx
 import type { Metadata } from "next";
+
+const title = "Extract Images from PDF Online – Free & Secure | Thirdy Gayares PDF Toolkit";
+const description = "Upload a PDF (≤20MB) and instantly extract all embedded images. Preview thumbnails, select what you need, and download per-image or as a zip. 100% private—processed in your browser.";
+
 
 export const metadata: Metadata = {
     title: {
-        default: "Split PDF Pages Online – Free & Secure | Thirdy Gayares PDF Toolkit",
-        template: "%s | Thirdy Gayares",
+        default: title,
+        template: "%s | Thirdy Gayares PDF Toolkit",
     },
-    description:
-        "Upload a PDF, pick exact pages to keep using thumbnail preview (1–5 columns), and download instantly. 100% private—processed in your browser.",
+    description: description,
     keywords: [
-        "Split PDF",
-        "PDF splitter",
-        "Extract PDF pages",
-        "Remove PDF pages",
-        "Select pages to keep",
-        "Free PDF split tool",
-        "Secure PDF split",
+        "Extract images from PDF",
+        "PDF image extractor",
+        "Download PDF images",
+        "Export images from PDF",
+        "Free PDF image tool",
+        "Secure PDF image extraction",
         "No upload PDF tool",
         "Browser PDF tools",
-        "PDF toolkit",
-        "Thirdy Gayares",
-        "Next.js PDF tool",
-        "TailwindCSS UI",
-        "Privacy first PDF",
+        "Thirdy Gayares PDF Toolkit",
+        "Private PDF image extractor",
     ],
+
     metadataBase: new URL("https://pdf-toolkit.thirdygayares.com"),
     publisher: "Thirdy Gayares",
     authors: [{ name: "Thirdy Gayares", url: "https://thirdygayares.com" }],
     alternates: {
-        canonical: "https://pdf-toolkit.thirdygayares.com/split-pdf",
+        canonical: "https://pdf-toolkit.thirdygayares.com/pdf-extract-image",
     },
     openGraph: {
-        title: "Free & Secure PDF Splitter | Select Pages and Download",
-        description:
-            "Choose exactly which pages to keep and export a new PDF—right in your browser. No uploads, no limits.",
-        url: "https://pdf-toolkit.thirdygayares.com/split-pdf",
+        title: title,
+        description: description,
+        url: "https://pdf-toolkit.thirdygayares.com/pdf-extract-image",
         siteName: "Thirdy Gayares PDF Toolkit",
         images: [
             {
@@ -49,9 +47,8 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         site: "@thirdygayares",
-        title: "Split PDF Pages Securely – Seamless Page Selection",
-        description:
-            "Pick pages via thumbnail grid (1–5 columns) and download instantly. Built with Next.js + Tailwind.",
+        title: title,
+        description: description,
         images: [
             "https://pdf-toolkit.thirdygayares.com/image/split-pdf-toolkit-by-thirdygayares.jpg",
         ],
