@@ -47,31 +47,34 @@ export default function PdfExtractImagePage() {
                                 hasFile={Boolean(pendingFile)}
                                 onReset={() => setPendingFile(null)}
                             />
+                            {pendingFile &&
+                                <div className="flex flex-col gap-4">
+                                    <Card>
+                                        <CardHeader>
+                                            <CardTitle>Options</CardTitle>
+                                        </CardHeader>
+                                        <CardContent className="flex items-center gap-3">
+                                            <Switch
+                                                id="dedupe"
+                                                checked={state.dedupeByXref}
+                                                onCheckedChange={(v) => setDedupe(v)}
+                                            />
+                                            <Label htmlFor="dedupe" className="cursor-pointer">
+                                                Deduplicate identical images (by XRef)
+                                            </Label>
+                                        </CardContent>
+                                    </Card>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Options</CardTitle>
-                                </CardHeader>
-                                <CardContent className="flex items-center gap-3">
-                                    <Switch
-                                        id="dedupe"
-                                        checked={state.dedupeByXref}
-                                        onCheckedChange={(v) => setDedupe(v)}
-                                    />
-                                    <Label htmlFor="dedupe" className="cursor-pointer">
-                                        Deduplicate identical images (by XRef)
-                                    </Label>
-                                </CardContent>
-                            </Card>
-
-                            <button
-                                className="inline-flex items-center justify-center px-4 py-2 rounded-md bg-primary text-primary-foreground disabled:opacity-50"
-                                disabled={!pendingFile || state.busy}
-                                onClick={() => pendingFile && extract(pendingFile)}
-                            >
-                                {state.busy ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
-                                Extract images
-                            </button>
+                                    <button
+                                        className="inline-flex items-center justify-center px-4 py-2 rounded-md bg-primary text-primary-foreground disabled:opacity-50"
+                                        disabled={!pendingFile || state.busy}
+                                        onClick={() => pendingFile && extract(pendingFile)}
+                                    >
+                                        {state.busy ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                                        Extract images
+                                    </button>
+                                </div>
+                        }
                         </div>
                     </div>
                 )}
