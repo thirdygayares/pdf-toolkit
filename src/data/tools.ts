@@ -38,8 +38,8 @@ export const tools: Tool[] = [
         name: "Extract Image",
         description: "Extract all embedded images from PDFs",
         icon: "Image",
-        available: false,
-        comingSoon: true,
+        available: true,
+        href: "/pdf-extract-image",
     },
     {
         id: "compress",
