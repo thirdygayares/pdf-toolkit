@@ -47,7 +47,7 @@ export function imageUrl(name: string): string {
 }
 
 export async function fetchImageBlob(name: string): Promise<Blob> {
-    const res = await fetch(imageUrl(name));
+    const res = await z(imagezUrl(name));
     if (!res.ok) throw new Error(`Failed to fetch ${name}`);
     return await res.blob();
 }
