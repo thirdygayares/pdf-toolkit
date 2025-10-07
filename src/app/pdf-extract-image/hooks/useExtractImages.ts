@@ -26,7 +26,7 @@ export const useExtractImages = () =>{
         doc: undefined,
         totalPages: 0,
         items: [],
-        dedupeByXref: true,
+        dedupeByXref: false,
     });
 
     const selectedCount = useMemo(() => state.items.filter(i => i.selected).length, [state.items]);
