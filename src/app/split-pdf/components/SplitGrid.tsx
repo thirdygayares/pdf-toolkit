@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils"
 import type { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api"
 import { useEffect, useMemo, useState } from "react"
-import { getDocument, GlobalWorkerOptions, version as pdfjsVersion } from "pdfjs-dist"
 import { PdfThumbnail } from "@/app/split-pdf/components/PdfThumbnail"
 
 interface SplitGridProps {
@@ -18,9 +17,7 @@ export const SplitGrid = (props: SplitGridProps) => {
     const { pageCount, checked, onToggle, columns, file } = props
     const [doc, setDoc] = useState<PDFDocumentProxy | null>(null)
 
-    // Set the worker once
-    GlobalWorkerOptions.workerSrc =
-        `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsVersion}/pdf.worker.min.js`
+
 
     const gridCls = useMemo(() => {
         switch (columns) {
@@ -35,21 +32,31 @@ export const SplitGrid = (props: SplitGridProps) => {
     }, [columns])
 
     useEffect(() => {
-        let cancelled = false
-        ;(async () => {
-            try {
-                const bytes = await file.arrayBuffer()
-                const task = getDocument({ data: bytes })
-                const proxy: PDFDocumentProxy = await task.promise
-                if (!cancelled) setDoc(proxy)
-            } catch (e) {
-                console.error("Failed to load PDF for thumbnails:", e)
-                setDoc(null)
-            }
-        })()
-        return () => { cancelled = true; setDoc(null) }
-    }, [file])
+        let cancelled = false;
 
+        (async () => {
+            try {
+                const pdfModule = await import("pdfjs-dist/build/pdf");
+                const worker = await import("pdfjs-dist/build/pdf.worker.min.js?url");
+
+                pdfModule.GlobalWorkerOptions.workerSrc = worker.default;
+
+                const bytes = await file.arrayBuffer();
+                const task = pdfModule.getDocument({ data: bytes });
+                const proxy: PDFDocumentProxy = await task.promise;
+
+                if (!cancelled) setDoc(proxy);
+            } catch (e) {
+                console.error("Failed to load PDF for thumbnails:", e);
+                setDoc(null);
+            }
+        })();
+
+        return () => {
+            cancelled = true;
+            setDoc(null);
+        };
+    }, [file]);
     return (
         <div className={cn("grid gap-4", gridCls)}>
             {Array.from({ length: pageCount }).map((_, i) => (
