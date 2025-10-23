@@ -16,13 +16,16 @@ import {PageSelectionHeader} from "@/app/split-pdf/components/PageSelectionHeade
 import {SplitPdfAction} from "@/app/split-pdf/components/SplitPdfAction";
 import {FAQ} from "@/components/FAQ";
 import {FaqSplitPdf} from "@/components/faqs/FaqSplitPdf";
+import dynamic from "next/dynamic";
 
 
 export default function SplitPdfPage() {
     const router = useRouter()
     const { state, loadPdf, clearAll, toggle, setAll, invert, splitPdf, includedCount } = useSplitPdf()
     const [columns, setColumns] = useState<1 | 2 | 3 | 4 | 5 >(2)
-
+    const SplitGrid = dynamic(() => import("./components/SplitGrid").then(m => m.SplitGrid), {
+        ssr: false,
+    });
     return (
         <div className="min-h-screen bg-background">
             <Header />
