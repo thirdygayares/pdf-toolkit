@@ -14,6 +14,7 @@ export const navigation: NavigationItem[] = [
             { name: "Extract Text", href: "/pdf-extract-text" },
             { name: "Split PDF", href: "/split-pdf" },
             { name: "Extract Image", href: "/pdf-extract-image" },
+            { name: "Image to PDF", href: "/image-pdf" },
             { name: "Compress PDF", href: "#" },
             { name: "Convert PDF", href: "#" },
             { name: "Protect PDF", href: "#" },

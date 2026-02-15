@@ -42,6 +42,14 @@ export const tools: Tool[] = [
         href: "/pdf-extract-image",
     },
     {
+        id: "image-pdf",
+        name: "Image to PDF",
+        description: "Combine multiple images into one PDF with page setup controls.",
+        icon: "Images",
+        available: true,
+        href: "/image-pdf",
+    },
+    {
         id: "compress",
         name: "Compress PDF",
         description: "Reduce PDF file size while maintaining quality.",
