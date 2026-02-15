@@ -1,14 +1,15 @@
 export const heroData = {
-    title: "Professional PDF Toolkit",
-    subtitle: "Complete PDF Solutions at Your Fingertips",
+    title: "Fast, private PDF tools right in your browser",
+    subtitle: "Merge, split, extract, and convert in a few clicks",
     description:
-        "Transform, merge, extract, and manage your PDF files with our comprehensive suite of professional tools. Fast, secure, and easy to use.",
+        "Process documents locally with a clean workflow built for speed. No account needed, no unnecessary steps, just practical PDF tools that work.",
     primaryButton: {
-        text: "Explore Tools",
-        href: "#tools",
+        text: "Open Tools",
+        href: "/#tools",
     },
     secondaryButton: {
-        text: "Learn More",
-        href: "#about",
+        text: "Merge PDFs",
+        href: "/merge-pdf",
     },
+    trustPoints: ["No sign-up", "Files processed locally", "Free to use"],
 }

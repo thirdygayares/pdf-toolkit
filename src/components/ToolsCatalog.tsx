@@ -1,103 +1,87 @@
 import Link from "next/link"
-import { Lock, Clock, ArrowRight, Sparkles } from "lucide-react"
+import type { ComponentType } from "react"
+import { ArrowRight, Clock3, Sparkles } from "lucide-react"
 import * as LucideIcons from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { tools } from "@/data/tools"
 
 export const ToolsCatalog = () => {
     const getIcon = (iconName: string) => {
-        const IconComponent = (LucideIcons as any)[iconName]
-        return IconComponent ? <IconComponent className="h-8 w-8" /> : <LucideIcons.FileText className="h-8 w-8" />
+        const IconComponent = (LucideIcons as Record<string, ComponentType<{ className?: string }>>)[iconName]
+        return IconComponent ? <IconComponent className="h-5 w-5" /> : <LucideIcons.FileText className="h-5 w-5" />
     }
 
-    return (
-        <section id="tools" className="py-24 relative">
-            {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background"></div>
+    const availableTools = tools.filter((tool) => tool.available)
+    const comingSoonTools = tools.filter((tool) => !tool.available).slice(0, 2)
+    const popularTools = [...availableTools, ...comingSoonTools].slice(0, 6)
 
-            <div className="container mx-auto px-4 relative">
-                <div className="text-center mb-20">
-                    <Badge
-                        variant="secondary"
-                        className="px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20 mb-6"
-                    >
-                        <Sparkles className="h-4 w-4 mr-2" />
-                        Tools Collection
+    return (
+        <section id="tools" className="relative py-16 sm:py-20 lg:py-24">
+            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-surface via-background to-background" />
+
+            <div className="container mx-auto px-4">
+                <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+                    <Badge variant="secondary" className="mb-4 border-border/70 bg-surface px-3 py-1 text-xs font-semibold">
+                        <Sparkles className="h-3.5 w-3.5 text-primary" />
+                        Popular tools
                     </Badge>
-                    <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">Professional PDF Tools</h2>
-                    <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                        Comprehensive suite of PDF tools designed to handle all your document processing needs with
-                        professional-grade quality and performance.
+                    <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
+                        Start with the most-used PDF actions
+                    </h2>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+                        Open a tool and finish your task in minutes. Merge, split, extract text, and pull images without signing up.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                    {tools.map((tool, index) => (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+                    {popularTools.map((tool) => (
                         <Card
                             key={tool.id}
-                            className={`group relative transition-all duration-500 hover:shadow-2xl ${
+                            className={`group h-full rounded-2xl border-border/80 bg-card/95 py-0 shadow-sm transition-all duration-200 ${
                                 tool.available
-                                    ? "hover:shadow-primary/20 border-primary/20 hover:border-primary/40 hover:-translate-y-2"
-                                    : "opacity-75 hover:opacity-90"
-                            } ${index % 2 === 0 ? "lg:mt-8" : ""}`}
+                                    ? "hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                                    : "border-dashed opacity-90"
+                            }`}
                         >
-                            {/* Gradient overlay for available tools */}
-                            {tool.available && (
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            )}
-
-                            <CardHeader className="pb-4 relative">
-                                <div className="flex items-start justify-between mb-4">
-                                    <div
-                                        className={`p-4 rounded-xl transition-all duration-300 ${
-                                            tool.available
-                                                ? "bg-primary/10 text-primary group-hover:bg-primary/20 group-hover:scale-110"
-                                                : "bg-muted text-muted-foreground"
-                                        }`}
-                                    >
+                            <CardHeader className="space-y-3 border-b border-border/70 pb-4 sm:space-y-4 py-5">
+                                <div className="flex items-start justify-between gap-3">
+                                    <div className="inline-flex rounded-lg border border-border/80 bg-surface p-2.5 text-primary">
                                         {getIcon(tool.icon)}
                                     </div>
-                                    <div className="flex flex-col items-end space-y-2">
-                                        {!tool.available && <Lock className="h-5 w-5 text-muted-foreground" />}
-                                        {tool.comingSoon && (
-                                            <Badge
-                                                variant="secondary"
-                                                className="flex items-center space-x-1 bg-orange-100 text-orange-700 border-orange-200"
-                                            >
-                                                <Clock className="h-3 w-3" />
-                                                <span>Coming Soon</span>
-                                            </Badge>
-                                        )}
-                                        {tool.available && (
-                                            <Badge className="bg-green-100 text-green-700 border-green-200">Available</Badge>
-                                        )}
-                                    </div>
+                                    {tool.available ? (
+                                        <Badge className="border-success/35 bg-success/15 text-success">Available</Badge>
+                                    ) : (
+                                        <Badge className="border-warning/35 bg-warning/15 text-warning">
+                                            <Clock3 className="h-3 w-3" />
+                                            Coming soon
+                                        </Badge>
+                                    )}
                                 </div>
-                                <CardTitle
-                                    className={`text-xl mb-2 transition-colors ${
-                                        tool.available ? "text-foreground group-hover:text-primary" : "text-muted-foreground"
-                                    }`}
-                                >
-                                    {tool.name}
-                                </CardTitle>
-                                <CardDescription className="text-sm leading-relaxed">{tool.description}</CardDescription>
+                                <div>
+                                    <CardTitle className="text-xl sm:text-2xl/none lg:text-xl">{tool.name}</CardTitle>
+                                    <CardDescription className="mt-2 line-clamp-3 text-sm leading-relaxed sm:text-base lg:text-sm">
+                                        {tool.description}
+                                    </CardDescription>
+                                </div>
                             </CardHeader>
-                            <CardContent className="pt-0 relative">
+
+                            <CardContent className="mt-auto pt-4 pb-5">
                                 {tool.available ? (
-                                    <Button
-                                        asChild
-                                        className="w-full group/btn bg-primary hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300"
-                                    >
-                                        <Link href={tool.href!} className="flex items-center justify-center space-x-2">
-                                            <span>Use Tool</span>
-                                            <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                                    <Button asChild className="h-10 w-full justify-center rounded-lg text-sm font-semibold sm:h-11">
+                                        <Link href={tool.href!}>
+                                            Open
+                                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                                         </Link>
                                     </Button>
                                 ) : (
-                                    <Button disabled className="w-full bg-muted text-muted-foreground">
-                                        Coming Soon
+                                    <Button
+                                        disabled
+                                        variant="outline"
+                                        className="h-10 w-full rounded-lg border-border bg-surface text-sm text-muted-foreground sm:h-11"
+                                    >
+                                        Coming soon
                                     </Button>
                                 )}
                             </CardContent>

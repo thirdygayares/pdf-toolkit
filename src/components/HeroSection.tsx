@@ -1,85 +1,133 @@
 import Link from "next/link"
-import { ArrowRight, FileText, Zap } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowRight, CheckCircle2, FileUp, Lock, ShieldCheck, Sparkles, Zap } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { heroData } from "@/data/hero"
+
+const previewTools = [
+    { name: "Merge PDF", icon: Sparkles },
+    { name: "Extract Text", icon: Zap },
+    { name: "Split PDF", icon: FileUp },
+]
+
+const workflowSteps = [
+    "Upload your PDF files",
+    "Choose the tool and options",
+    "Download your result",
+]
 
 export const HeroSection = () => {
     return (
-        <section className="relative py-24 lg:py-32 overflow-hidden">
-            {/* Background Elements */}
+        <section className="relative overflow-hidden border-b border-border/70 py-16 sm:py-20 lg:py-24">
             <div className="absolute inset-0 -z-10">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/10 via-primary/5 to-transparent rounded-full blur-3xl"></div>
-                <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-gradient-to-l from-secondary/10 to-transparent rounded-full blur-2xl"></div>
-                <div className="absolute bottom-0 left-0 w-[600px] h-[300px] bg-gradient-to-r from-primary/5 to-transparent rounded-full blur-2xl"></div>
+                <div className="absolute inset-x-0 top-[-220px] h-[520px] bg-[radial-gradient(circle_at_top,var(--semantic-primary)_0%,transparent_72%)] opacity-[0.18]" />
+                <div className="absolute inset-0 surface-grid opacity-15 [mask-image:radial-gradient(circle_at_top,black,transparent_72%)]" />
             </div>
 
             <div className="container mx-auto px-4">
-                <div className="max-w-5xl mx-auto text-center">
-                    {/* Badge */}
-                    <div className="mb-8">
+                <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+                    <div className="max-w-2xl">
                         <Badge
                             variant="secondary"
-                            className="px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20"
+                            className="mb-6 border-border/70 bg-surface px-4 py-2 text-sm font-medium text-foreground"
                         >
-                            <FileText className="h-4 w-4 mr-2" />
-                            Professional PDF Tools
+                            <ShieldCheck className="h-4 w-4 text-primary" />
+                            Privacy-first PDF Toolkit
                         </Badge>
-                    </div>
 
-                    {/* Main Content */}
-                    <div className="mb-12">
-                        <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-8 leading-tight tracking-tight">
+                        <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                             {heroData.title}
                         </h1>
-                        <div className="relative">
-                            <h2 className="text-2xl md:text-3xl text-primary font-semibold mb-6 relative z-10">
-                                {heroData.subtitle}
-                            </h2>
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent blur-xl rounded-full"></div>
+                        <p className="mt-5 text-lg font-medium text-primary">{heroData.subtitle}</p>
+                        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">{heroData.description}</p>
+
+                        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                            <Button
+                                asChild
+                                size="lg"
+                                className="h-11 rounded-lg px-6 text-sm font-semibold shadow-sm hover:shadow-md"
+                            >
+                                <Link href={heroData.primaryButton.href}>
+                                    {heroData.primaryButton.text}
+                                    <ArrowRight className="h-4 w-4" />
+                                </Link>
+                            </Button>
+                            <Button
+                                asChild
+                                size="lg"
+                                variant="outline"
+                                className="h-11 rounded-lg border-border bg-background px-6 text-sm font-semibold"
+                            >
+                                <Link href={heroData.secondaryButton.href}>{heroData.secondaryButton.text}</Link>
+                            </Button>
                         </div>
-                        <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">{heroData.description}</p>
+
+                        <ul className="mt-7 flex flex-wrap gap-2.5">
+                            {heroData.trustPoints.map((point) => (
+                                <li
+                                    key={point}
+                                    className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                                >
+                                    <CheckCircle2 className="h-3.5 w-3.5 text-success" />
+                                    {point}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
-                    {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-                        <Button
-                            asChild
-                            size="lg"
-                            className="text-lg px-8 py-6 h-auto bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300"
-                        >
-                            <Link href={heroData.primaryButton.href} className="flex items-center space-x-3">
-                                <Zap className="h-5 w-5" />
-                                <span>{heroData.primaryButton.text}</span>
-                                <ArrowRight className="h-5 w-5" />
-                            </Link>
-                        </Button>
-                        <Button
-                            asChild
-                            variant="outline"
-                            size="lg"
-                            className="text-lg px-8 py-6 h-auto border-2 hover:bg-accent/50 bg-transparent"
-                        >
-                            <Link href={heroData.secondaryButton.href} className="flex items-center space-x-2">
-                                <FileText className="h-5 w-5" />
-                                <span>{heroData.secondaryButton.text}</span>
-                            </Link>
-                        </Button>
-                    </div>
+                    <div className="relative">
+                        <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-primary/20 via-accent-strong/15 to-transparent blur-2xl" />
+                        <div className="relative rounded-2xl border border-border/70 bg-card/95 p-5 shadow-xl backdrop-blur sm:p-6">
+                            <div className="flex items-center justify-between border-b border-border/70 pb-4">
+                                <div>
+                                    <p className="text-sm font-semibold text-foreground">PDF Toolkit</p>
+                                    <p className="text-xs text-muted-foreground">Process locally. Download instantly.</p>
+                                </div>
+                                <Badge className="border-success/30 bg-success/15 text-success">Live</Badge>
+                            </div>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-                        <div className="text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">2+</div>
-                            <div className="text-sm text-muted-foreground">Active Tools</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">100%</div>
-                            <div className="text-sm text-muted-foreground">Free to Use</div>
-                        </div>
-                        <div className="text-center">
-                            <div className="text-3xl font-bold text-primary mb-2">4+</div>
-                            <div className="text-sm text-muted-foreground">Coming Soon</div>
+                            <div className="mt-4 rounded-xl border border-dashed border-primary/40 bg-primary/5 p-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="rounded-md bg-primary/15 p-2 text-primary">
+                                        <FileUp className="h-5 w-5" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-medium text-foreground">Drop files here</p>
+                                        <p className="text-xs text-muted-foreground">PDF only, processed in browser</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 space-y-2 rounded-xl border border-border/70 bg-surface p-4">
+                                {workflowSteps.map((step, index) => (
+                                    <div key={step} className="flex items-center justify-between gap-4">
+                                        <div className="flex items-center gap-2 text-sm text-foreground">
+                                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
+                                                {index + 1}
+                                            </span>
+                                            {step}
+                                        </div>
+                                        <span className="text-xs text-muted-foreground">{index < 2 ? "Done" : "Ready"}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3">
+                                {previewTools.map((tool) => {
+                                    const Icon = tool.icon
+                                    return (
+                                        <div key={tool.name} className="rounded-xl border border-border/70 bg-card p-3">
+                                            <Icon className="mb-2 h-4 w-4 text-primary" />
+                                            <p className="text-xs font-medium text-foreground">{tool.name}</p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+
+                            <div className="mt-4 flex items-center gap-2 rounded-lg border border-border/70 bg-surface px-3 py-2 text-xs text-muted-foreground">
+                                <Lock className="h-3.5 w-3.5 text-primary" />
+                                Files stay on your device unless you choose to share them.
+                            </div>
                         </div>
                     </div>
                 </div>
