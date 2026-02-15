@@ -1,88 +1,120 @@
 import Link from "next/link"
 import Image from "next/image"
-import {Github, Twitter, Linkedin, Mail, Globe, Youtube} from "lucide-react"
+import { Github, Globe, Linkedin, Youtube } from "lucide-react"
 import { footerData } from "@/data/footer"
+import { navigation } from "@/data/navigation"
 import { tools } from "@/data/tools"
 
 export const Footer = () => {
+    const quickLinks = navigation.filter((item) => !item.children)
+
     return (
-        <footer className="bg-muted/30 border-t">
-            <div className="container mx-auto px-4 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    {/* Logo and Description */}
-                    <div className="lg:col-span-1">
-                        <Link href="/" className="flex items-center space-x-3 mb-6">
-                            <Image src="/logo.svg" alt="PDF Toolkit" width={36} height={36} className="h-9 w-9" />
+        <footer className="border-t border-border/80 bg-surface/45">
+            <div className="container mx-auto px-4 py-12 sm:py-14 lg:py-16">
+                <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+                    <div>
+                        <Link href="/" className="mb-5 inline-flex items-center space-x-3">
+                            <Image src="/logo.svg" alt="PDF Toolkit" width={36} height={36} className="h-8 w-8 sm:h-9 sm:w-9" />
                             <div className="flex flex-col">
-                                <span className="text-xl font-bold text-primary">PDF Toolkit</span>
-                                <span className="text-xs text-muted-foreground -mt-1">Professional Tools</span>
+                                <span className="text-lg font-semibold text-foreground sm:text-xl">PDF Toolkit</span>
+                                <span className="text-xs text-muted-foreground -mt-1">Professional tools</span>
                             </div>
                         </Link>
-                        <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                        <p className="mb-5 max-w-sm text-sm leading-relaxed text-muted-foreground sm:text-base">
                             Professional PDF tools for all your document needs. Fast, secure, and easy to use.
                         </p>
-                        <div className="flex space-x-4">
-                            <Link href="https://github.com/thirdygayares" className="text-muted-foreground hover:text-primary transition-colors">
+                        <div className="flex items-center gap-2">
+                            <Link
+                                href="https://github.com/thirdygayares"
+                                className="rounded-md border border-border/70 p-2 text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                                aria-label="GitHub"
+                            >
                                 <Github className="h-5 w-5" />
                             </Link>
-                            <Link href="https://www.youtube.com/@thirdygayares" className="text-muted-foreground hover:text-primary transition-colors">
+                            <Link
+                                href="https://www.youtube.com/@thirdygayares"
+                                className="rounded-md border border-border/70 p-2 text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                                aria-label="YouTube"
+                            >
                                 <Youtube className="h-5 w-5" />
                             </Link>
-                            <Link href="https://www.linkedin.com/in/thirdygayares/" className="text-muted-foreground hover:text-primary transition-colors">
+                            <Link
+                                href="https://www.linkedin.com/in/thirdygayares/"
+                                className="rounded-md border border-border/70 p-2 text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                                aria-label="LinkedIn"
+                            >
                                 <Linkedin className="h-5 w-5" />
                             </Link>
-                            <Link href="https://thirdygayares.com" className="text-muted-foreground hover:text-primary transition-colors">
+                            <Link
+                                href="https://thirdygayares.com"
+                                className="rounded-md border border-border/70 p-2 text-muted-foreground transition-colors hover:border-primary/30 hover:text-primary"
+                                aria-label="Website"
+                            >
                                 <Globe className="h-5 w-5" />
                             </Link>
                         </div>
                     </div>
 
-                    {/* Tools */}
                     <div>
-                        <h3 className="font-semibold text-foreground mb-6 text-lg">Tools</h3>
-                        <ul className="space-y-3">
+                        <h3 className="mb-4 text-base font-semibold text-foreground sm:text-lg">Navigation</h3>
+                        <ul className="space-y-2.5">
+                            {quickLinks.map((item) => (
+                                <li key={item.name}>
+                                    <Link href={item.href} className="text-sm text-muted-foreground transition-colors hover:text-primary sm:text-base">
+                                        {item.name}
+                                    </Link>
+                                </li>
+                            ))}
+                            <li>
+                                <Link href="/#tools" className="text-sm text-muted-foreground transition-colors hover:text-primary sm:text-base">
+                                    Tools
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 className="mb-4 text-base font-semibold text-foreground sm:text-lg">Tools</h3>
+                        <ul className="space-y-2.5">
                             {tools.map((tool) => (
                                 <li key={tool.id}>
-                                    <Link
-                                        href={tool.available ? tool.href! : "#"}
-                                        className={`text-sm transition-colors flex items-center justify-between group ${
-                                            tool.available
-                                                ? "text-muted-foreground hover:text-primary"
-                                                : "text-muted-foreground/50 cursor-not-allowed"
-                                        }`}
-                                    >
-                                        <span>{tool.name}</span>
-                                        {!tool.available && (
-                                            <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">Soon</span>
-                                        )}
-                                    </Link>
+                                    {tool.available ? (
+                                        <Link
+                                            href={tool.href!}
+                                            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary sm:text-base"
+                                        >
+                                            <span>{tool.name}</span>
+                                        </Link>
+                                    ) : (
+                                        <div className="inline-flex items-center gap-2 text-sm text-muted-foreground/80 sm:text-base">
+                                            <span>{tool.name}</span>
+                                            <span className="rounded border border-warning/35 bg-warning/15 px-2 py-0.5 text-xs text-warning">
+                                                Soon
+                                            </span>
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* About Me */}
                     <div>
-                        <h3 className="font-semibold text-foreground mb-6 text-lg">{footerData.about.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{footerData.about.description}</p>
-                        <ul className="space-y-3">
+                        <h3 className="mb-3 text-base font-semibold text-foreground sm:text-lg">{footerData.about.title}</h3>
+                        <p className="mb-4 text-sm leading-relaxed text-muted-foreground sm:text-base">{footerData.about.description}</p>
+                        <ul className="space-y-2.5">
                             {footerData.about.links.map((link) => (
                                 <li key={link.name}>
-                                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                                    <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-primary sm:text-base">
                                         {link.name}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
-                    </div>
-
-                    {/* Legal */}
-                    <div>
-                        <h3 className="font-semibold text-foreground mb-6 text-lg">Legal</h3>
-                        <ul className="space-y-3">
+                        <h3 className="mb-3 mt-6 text-base font-semibold text-foreground sm:text-lg">Legal</h3>
+                        <ul className="space-y-2.5">
                             {footerData.legal.map((link) => (
                                 <li key={link.name}>
-                                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                                    <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-primary sm:text-base">
                                         {link.name}
                                     </Link>
                                 </li>
@@ -91,12 +123,11 @@ export const Footer = () => {
                     </div>
                 </div>
 
-                <div className="border-t mt-12 pt-8">
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                        <p className="text-sm text-muted-foreground">
+                <div className="mt-10 border-t border-border/70 pt-6 sm:mt-12 sm:pt-7">
+                    <div className="flex flex-col items-start justify-between gap-2 text-left sm:flex-row sm:items-center sm:text-left">
+                        <p className="text-sm text-muted-foreground sm:text-base">
                             © {new Date().getFullYear()} PDF Toolkit. All rights reserved.
                         </p>
-                        <p className="text-sm text-muted-foreground mt-2 md:mt-0">Made with ❤️ by Thirdy Gayares</p>
                     </div>
                 </div>
             </div>

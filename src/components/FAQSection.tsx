@@ -3,12 +3,14 @@ import { faqData } from "@/data/faq"
 
 export const FAQSection = () => {
     return (
-        <section id="faq" className="py-20 bg-muted/30">
+        <section id="faq" className="py-20 bg-surface/50 sm:py-24">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
-                        <p className="text-lg text-muted-foreground">Find answers to common questions about our PDF tools</p>
+                    <div className="mb-12 text-center sm:mb-14">
+                        <h2 className="mb-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">Frequently asked questions</h2>
+                        <p className="text-base text-muted-foreground sm:text-lg">
+                            Quick answers about privacy, processing, and supported PDF actions.
+                        </p>
                     </div>
 
                     <Accordion type="single" collapsible className="space-y-4">
@@ -16,9 +18,9 @@ export const FAQSection = () => {
                             <AccordionItem
                                 key={index}
                                 value={`item-${index}`}
-                                className="bg-background border border-primary/20 rounded-lg px-6"
+                                className="rounded-xl border border-border/80 bg-card px-6"
                             >
-                                <AccordionTrigger className="text-left hover:text-primary transition-colors">
+                                <AccordionTrigger className="text-left transition-colors hover:text-primary">
                                     {faq.question}
                                 </AccordionTrigger>
                                 <AccordionContent className="text-muted-foreground leading-relaxed">{faq.answer}</AccordionContent>
