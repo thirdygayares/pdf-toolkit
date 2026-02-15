@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { FAQItem } from "@/components/FAQ";
 
 export const FaqSplitPdf: FAQItem[] = [
@@ -7,12 +6,12 @@ export const FaqSplitPdf: FAQItem[] = [
         question: "What does the Split PDF tool do?",
         answer: (
             <>
-                It lets you upload a PDF, choose exactly which pages to keep via thumbnails, and instantly
-                download a new PDF that contains only those pages.
+                It lets you upload one or multiple PDFs, choose exactly which pages to keep via thumbnails,
+                and instantly download a new PDF that contains only those pages.
             </>
         ),
         answerPlain:
-            "It lets you upload a PDF, choose which pages to keep via thumbnails, and download a new PDF with only those pages.",
+            "It lets you upload one or multiple PDFs, choose which pages to keep, and download a new PDF with only those pages.",
     },
     {
         id: "how-select",
@@ -32,12 +31,12 @@ export const FaqSplitPdf: FAQItem[] = [
         question: "Can I change the thumbnail grid size?",
         answer: (
             <>
-                Yes. Use <em>Pages per row</em> to switch between 1–5 columns so you can preview large
-                pages comfortably or scan many pages at once.
+                Yes. Use <em>Pages per row</em> to switch layouts. On mobile you can use 1 or 2 columns;
+                on desktop you can use up to 5.
             </>
         ),
         answerPlain:
-            "Yes. Use Pages per row to switch between 1–5 columns.",
+            "Yes. On mobile you can use 1 or 2 columns; on desktop you can use up to 5.",
     },
     {
         id: "processing",
@@ -103,11 +102,12 @@ export const FaqSplitPdf: FAQItem[] = [
         question: "Can I reorder pages while splitting?",
         answer: (
             <>
-                This tool focuses on selecting pages to keep. Reordering isn’t supported here.
+                Yes. You can reorder uploaded files first, then drag page cards using the handle to set
+                exact output page order before you split and download.
             </>
         ),
         answerPlain:
-            "No. This tool is for selecting pages to keep; it does not reorder pages.",
+            "Yes. Reorder uploaded files and drag page cards with the handle to set output order.",
     },
     {
         id: "mobile",
@@ -150,14 +150,11 @@ export const FaqSplitPdf: FAQItem[] = [
         question: "Can I split multiple PDFs at once?",
         answer: (
             <>
-                This page handles one file at a time. If you need to combine files before splitting, try our{" "}
-                <Link href="/merge-pdf" className="underline font-extrabold text-primary">
-                    Merge PDF
-                </Link>{" "}
-                tool first.
+                Yes. Upload multiple PDFs, reorder the file list, choose pages to keep, then download one
+                combined split output.
             </>
         ),
         answerPlain:
-            "One file at a time. To combine files before splitting, use the Merge PDF tool first.",
+            "Yes. Upload multiple PDFs, reorder files, select pages, then download one split output.",
     },
 ];
