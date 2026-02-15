@@ -7,7 +7,7 @@ export const metadata: Metadata = {
         template: "%s | Thirdy Gayares",
     },
     description:
-        "Merge multiple PDF files into one document securely, directly in your browser. No uploads, no limits. Built with Next.js and TailwindCSS by Thirdy Gayares.",
+        "Merge multiple PDF files into one document securely in your browser. Drag to reorder files, combine PDFs fast, and download instantly with no server upload.",
     keywords: [
         "Merge PDF",
         "PDF combiner",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
         { name: "Thirdy Gayares", url: "https://thirdygayares.com" },
     ],
     alternates: {
-        canonical: "https://pdf-toolkit,thirdygayares.com/merge-pdf",
+        canonical: "https://pdf-toolkit.thirdygayares.com/merge-pdf",
     },
     openGraph: {
         title: "Free & Secure PDF Merger | Merge Files in Your Browser",
