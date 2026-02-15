@@ -1,102 +1,125 @@
 "use client"
 
 import type React from "react"
-
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { FileIcon, Plus, X } from "lucide-react"
-import {useFileUpload} from "@/hooks/useFileUpload";
+import { FileIcon, Plus, Upload, X } from "lucide-react"
+import { UploadedFile, useFileUpload } from "@/hooks/useFileUpload"
 
 interface FileUploadProps {
-    onFilesReady: (files: any[]) => void
+    onFilesReady: (files: UploadedFile[]) => void
 }
 
 export function FileUpload({ onFilesReady }: FileUploadProps) {
     const { files, fileInputRef, removeFile, openFileDialog, handleFileInputChange, handleDrop } = useFileUpload()
+    const [isDragging, setIsDragging] = useState(false)
 
-    const handleDragOver = (e: React.DragEvent) => {
-        e.preventDefault()
-        e.stopPropagation()
+    const handleDragOver = (event: React.DragEvent) => {
+        event.preventDefault()
+        event.stopPropagation()
+        setIsDragging(true)
+    }
+
+    const handleDragLeave = (event: React.DragEvent) => {
+        event.preventDefault()
+        event.stopPropagation()
+        setIsDragging(false)
+    }
+
+    const onDrop = (event: React.DragEvent) => {
+        setIsDragging(false)
+        handleDrop(event)
     }
 
     return (
-        <div
-            className="bg-white rounded-2xl border-2 border-dashed border-navy-200 p-8"
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-        >
-            <div className="text-center space-y-6">
-                <h2 className="text-2xl font-semibold text-navy-900">Upload your files</h2>
+        <section className="rounded-2xl border border-border/80 bg-card p-4 sm:p-6 lg:p-8">
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Upload your files</h2>
+                <span className="rounded-full border border-border/80 bg-surface px-3 py-1 text-xs font-medium text-muted-foreground">
+                    PDF only, up to 100MB each
+                </span>
+            </div>
 
-                {files.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+            <div
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={onDrop}
+                onClick={openFileDialog}
+                className={`cursor-pointer rounded-2xl border-2 border-dashed p-6 text-center transition-colors sm:p-9 ${
+                    isDragging
+                        ? "border-primary bg-primary/5"
+                        : "border-border bg-surface/40 hover:border-primary/40 hover:bg-accent/40"
+                }`}
+            >
+                <div className="mx-auto flex w-fit items-center justify-center rounded-full border border-border/80 bg-card p-3">
+                    <Upload className="h-7 w-7 text-primary sm:h-8 sm:w-8" />
+                </div>
+                <p className="mt-4 text-base font-medium text-foreground sm:text-lg">Drag and drop PDF files here</p>
+                <p className="mt-1 text-sm text-muted-foreground">or click to browse from your device</p>
+            </div>
+
+            {files.length > 0 && (
+                <div className="mt-5 space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                        <p className="text-sm font-medium text-foreground sm:text-base">Selected files ({files.length})</p>
+                        <Button variant="outline" size="sm" className="h-8 rounded-md px-3 text-xs sm:text-sm" onClick={openFileDialog}>
+                            <Plus className="h-3.5 w-3.5" />
+                            Add more
+                        </Button>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         {files.map((file) => (
-                            <div key={file.id} className="relative">
-                                <div className="border-2 border-navy-200 rounded-lg p-4 bg-navy-50">
-                                    <button
-                                        onClick={() => removeFile(file.id)}
-                                        className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 z-10"
-                                    >
-                                        <X className="w-3 h-3" />
-                                    </button>
-                                    <div className="flex flex-col items-center space-y-2">
-                                        <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                            <FileIcon className="w-6 h-6 text-red-600" />
-                                        </div>
-                                        <p className="text-xs text-center text-navy-600 truncate w-full" title={file.name}>
-                                            {file.name}
-                                        </p>
-                                    </div>
+                            <div key={file.id} className="flex items-center gap-3 rounded-xl border border-border/80 bg-background px-3 py-3">
+                                <div className="rounded-lg border border-border/70 bg-surface p-2 text-primary">
+                                    <FileIcon className="h-4 w-4" />
                                 </div>
+                                <div className="min-w-0 flex-1">
+                                    <p className="truncate text-sm font-medium text-foreground" title={file.name}>
+                                        {file.name}
+                                    </p>
+                                    <p className="text-xs text-muted-foreground">{(file.size / 1024).toFixed(2)} KB</p>
+                                </div>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-8 w-8 rounded-md text-muted-foreground hover:text-danger"
+                                    onClick={(event) => {
+                                        event.stopPropagation()
+                                        removeFile(file.id)
+                                    }}
+                                    aria-label={`Remove ${file.name}`}
+                                >
+                                    <X className="h-4 w-4" />
+                                </Button>
                             </div>
                         ))}
-
-                        <div
-                            onClick={openFileDialog}
-                            className="border-2 border-dashed border-navy-300 rounded-lg p-4 cursor-pointer hover:border-navy-400 hover:bg-navy-50"
-                        >
-                            <div className="flex flex-col items-center justify-center h-full space-y-2">
-                                <Plus className="w-8 h-8 text-navy-600" />
-                                <p className="text-sm text-navy-600 font-medium">Add more</p>
-                            </div>
-                        </div>
                     </div>
-                ) : (
-                    <div
-                        className="border-2 border-dashed border-navy-300 rounded-xl p-12 cursor-pointer hover:border-navy-400 hover:bg-navy-50"
-                        onClick={openFileDialog}
-                    >
-                        <div className="flex flex-col items-center space-y-4">
-                            <div className="w-16 h-16 bg-navy-100 rounded-full flex items-center justify-center">
-                                <Plus className="w-8 h-8 text-navy-600" />
-                            </div>
-                            <div className="text-center">
-                                <p className="text-lg font-medium text-navy-900 mb-2">Drop PDF files here</p>
-                                <p className="text-navy-600">or click to browse</p>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                </div>
+            )}
 
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    multiple
-                    accept=".pdf,application/pdf"
-                    onChange={handleFileInputChange}
-                    className="hidden"
-                />
+            <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept=".pdf,application/pdf"
+                onChange={handleFileInputChange}
+                className="hidden"
+            />
 
+            <div className="mt-6 flex flex-col gap-3 border-t border-border/70 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-xs text-muted-foreground sm:text-sm">
+                    No account required. Files stay in your browser until you download the merged PDF.
+                </p>
                 <Button
                     size="lg"
-                    className="bg-primary hover:bg-navy-800 text-white px-8 py-3"
+                    className="h-11 rounded-lg px-6 text-sm font-semibold"
                     disabled={files.length === 0}
                     onClick={() => onFilesReady(files)}
                 >
-                    {files.length === 0 ? "Select Files" : `Merge ${files.length} Files`}
+                    {files.length === 0 ? "Select files to continue" : `Arrange and merge (${files.length})`}
                 </Button>
-
-                <p className="text-sm text-navy-500">Upload unlimited PDF files, max 100MB each</p>
             </div>
-        </div>
+        </section>
     )
 }

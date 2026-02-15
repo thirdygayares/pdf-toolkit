@@ -1,15 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import {UploadedFile} from "@/hooks/useFileUpload";
-import {FileUpload} from "@/components/FileUpload";
-import {Hero} from "@/app/merge-pdf/components/Hero";
-import {FileManager} from "@/components/FileManager";
-import {DownloadModal} from "@/components/DownloadModal";
-import {toast} from "sonner";
-import {useWarnBeforeCloseRefresh} from "@/hooks/useWarnBeforeCloseRefresh";
-import {Header} from "@/components/Header";
-import {Footer} from "@/components/Footer";
+import { UploadedFile } from "@/hooks/useFileUpload"
+import { FileUpload } from "@/components/FileUpload"
+import { Hero } from "@/app/merge-pdf/components/Hero"
+import { FileManager } from "@/components/FileManager"
+import { DownloadModal } from "@/components/DownloadModal"
+import { toast } from "sonner"
+import { useWarnBeforeCloseRefresh } from "@/hooks/useWarnBeforeCloseRefresh"
+import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
 
 
 export default function HomePage() {
@@ -37,24 +37,25 @@ export default function HomePage() {
 
     useWarnBeforeCloseRefresh(files.length > 0, "You have unsaved uploaded files. Are you sure you want to leave this page?")
 
-
     return (
-        <div className="min-h-screen bg-navy-50">
+        <div className="min-h-screen bg-background">
             <Header />
-            <div className="container mx-auto px-4 py-8">
+            <main className="container mx-auto px-4 py-6 sm:py-10">
                 {files.length === 0 ? (
-                    <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-                        <Hero />
+                    <section className="mx-auto max-w-5xl space-y-8 sm:space-y-10">
                         <FileUpload onFilesReady={handleFilesReady} />
-                    </div>
+                        <Hero />
+                    </section>
                 ) : (
-                    <div className="max-w-4xl mx-auto">
-                        <div className="mb-8">
-                            <h1 className="text-2xl font-bold text-navy-900 mb-2">Arrange & Merge PDFs</h1>
-                            <p className="text-navy-600">Drag and drop to reorder your files before merging</p>
+                    <section className="mx-auto max-w-5xl space-y-6 sm:space-y-8">
+                        <div className="space-y-2">
+                            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Arrange and merge your PDFs</h1>
+                            <p className="text-sm text-muted-foreground sm:text-base">
+                                Reorder files by dragging, add more PDFs, then export one merged document.
+                            </p>
                         </div>
                         <FileManager files={files} onFilesChange={handleFilesChange} onMerge={handleMerge} />
-                    </div>
+                    </section>
                 )}
 
                 <DownloadModal
@@ -67,7 +68,7 @@ export default function HomePage() {
                     files={files}
                     onDownloadComplete={handleDownloadComplete}
                 />
-            </div>
+            </main>
             <Footer />
         </div>
     )

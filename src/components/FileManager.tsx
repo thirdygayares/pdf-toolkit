@@ -1,12 +1,13 @@
 "use client"
 
-import { useFileActions } from "@/hooks/useFileActions"
+import type { DropResult } from "@hello-pangea/dnd"
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd"
+import { Plus } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { FileCard } from "@/components/pdf/FileCard"
 import { Button } from "@/components/ui/button"
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
-import { Plus } from "lucide-react"
+import { useFileActions } from "@/hooks/useFileActions"
 import { UploadedFile } from "@/hooks/useFileUpload"
-import {useRouter} from "next/navigation";
 
 interface Props {
     files: UploadedFile[]
@@ -15,35 +16,45 @@ interface Props {
 }
 
 export const FileManager: React.FC<Props> = ({ files, onFilesChange, onMerge }) => {
-    const router = useRouter();
+    const router = useRouter()
     const { removeFile, moveToPosition, moveUp, moveDown, addMoreFiles, handleDrop } = useFileActions(files, onFilesChange)
 
-    const handleDragEnd = (result: any) => {
-        if (!result.destination) return
-        const updated = Array.from(files)
-        const [moved] = updated.splice(result.source.index, 1)
-        updated.splice(result.destination.index, 0, moved)
-        onFilesChange(updated)
+    const handleDragEnd = (result: DropResult) => {
+        if (!result.destination) {
+            return
+        }
+        const reorderedFiles = Array.from(files)
+        const [movedFile] = reorderedFiles.splice(result.source.index, 1)
+        reorderedFiles.splice(result.destination.index, 0, movedFile)
+        onFilesChange(reorderedFiles)
     }
 
     return (
-        <div className="bg-white p-6 border rounded-2xl" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
-            <div className="flex justify-between mb-6">
-                <h2 className="text-xl font-semibold text-navy-900">Uploaded Files ({files.length})</h2>
-                <Button onClick={addMoreFiles} variant="outline" size="sm" className="border-navy-200 text-navy-700">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add More
+        <section
+            className="rounded-2xl border border-border/80 bg-card p-4 shadow-sm sm:p-6 lg:p-7"
+            onDrop={handleDrop}
+            onDragOver={(event) => event.preventDefault()}
+        >
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">Rearrange files ({files.length})</h2>
+                <Button onClick={addMoreFiles} variant="outline" size="sm" className="h-9 rounded-md px-3">
+                    <Plus className="h-4 w-4" />
+                    Add files
                 </Button>
             </div>
 
             <DragDropContext onDragEnd={handleDragEnd}>
                 <Droppable droppableId="files">
                     {(provided) => (
-                        <div  ref={provided.innerRef} {...provided.droppableProps} className="space-y-3">
+                        <div ref={provided.innerRef} {...provided.droppableProps} className="space-y-3">
                             {files.map((file, index) => (
                                 <Draggable key={file.id} draggableId={file.id} index={index}>
                                     {(provided, snapshot) => (
-                                        <div {...provided.draggableProps} ref={provided.innerRef}  className={snapshot.isDragging ? "shadow-md" : ""}>
+                                        <div
+                                            {...provided.draggableProps}
+                                            ref={provided.innerRef}
+                                            className={snapshot.isDragging ? "rounded-xl ring-2 ring-primary/30" : ""}
+                                        >
                                             <FileCard
                                                 file={file}
                                                 index={index}
@@ -52,7 +63,7 @@ export const FileManager: React.FC<Props> = ({ files, onFilesChange, onMerge }) 
                                                 onRemove={() => removeFile(file.id)}
                                                 onMoveUp={() => moveUp(file.id)}
                                                 onMoveDown={() => moveDown(file.id)}
-                                                onMoveTo={(pos) => moveToPosition(file.id, pos)}
+                                                onMoveTo={(position) => moveToPosition(file.id, position)}
                                             />
                                         </div>
                                     )}
@@ -64,19 +75,23 @@ export const FileManager: React.FC<Props> = ({ files, onFilesChange, onMerge }) 
                 </Droppable>
             </DragDropContext>
 
-            <div onClick={addMoreFiles} className="mt-4 border-2 border-dashed border-navy-300 rounded-lg p-8 text-center cursor-pointer hover:border-navy-400 hover:bg-navy-50">
-                <Plus className="w-8 h-8 text-navy-400 mx-auto mb-2" />
-                <p className="text-navy-500">Drop more PDF files here or click to browse</p>
-            </div>
+            <button
+                type="button"
+                onClick={addMoreFiles}
+                className="mt-4 w-full rounded-xl border-2 border-dashed border-border bg-surface/50 p-6 text-center transition-colors hover:border-primary/40 hover:bg-accent/40 sm:p-7"
+            >
+                <Plus className="mx-auto mb-2 h-7 w-7 text-primary" />
+                <p className="text-sm font-medium text-foreground sm:text-base">Drop more PDFs here or click to browse</p>
+            </button>
 
-            <div className="mt-6 pt-6 border-t border-navy-200 flex flex-col gap-4">
-                <Button className="w-full bg-primary text-white hover:bg-navy-800 cursor-pointer" onClick={onMerge} size="lg" disabled={files.length === 0}>
-                    Merge PDF Files ({files.length})
+            <div className="mt-6 space-y-3 border-t border-border/70 pt-5">
+                <Button className="h-11 w-full rounded-lg text-sm font-semibold sm:h-12" onClick={onMerge} size="lg" disabled={files.length === 0}>
+                    Merge PDF files ({files.length})
                 </Button>
-                <Button variant="ghost" className="cursor-pointer" onClick={() => router.push("/")} size="lg" >
-                    Back to Home
+                <Button variant="ghost" className="h-10 w-full rounded-lg text-sm" onClick={() => router.push("/")} size="lg">
+                    Back to home
                 </Button>
             </div>
-        </div>
+        </section>
     )
 }
