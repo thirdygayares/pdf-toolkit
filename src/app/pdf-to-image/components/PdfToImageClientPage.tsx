@@ -112,6 +112,15 @@ const parseCustomRange = (raw: string, pageCount: number): number[] => {
     return Array.from(selected).sort((a, b) => a - b)
 }
 
+/**
+ * Render the PDF-to-image conversion page with file upload, page selection, preview, and conversion controls.
+ *
+ * The page lets users upload a PDF, choose pages (individually, via toolbar actions, or a custom range),
+ * preview pages, configure output format/resolution/quality, and convert selected pages to PNG/JPG
+ * (downloaded individually or packaged as a ZIP when multiple pages are selected).
+ *
+ * @returns The React element for the PDF-to-image client page.
+ */
 export default function PdfToImageClientPage() {
     const { state, loadPdfs, clearAll, toggle, setAll, invert, setCheckedPages, reorderPages, includedCount } = useSplitPdf()
     const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])

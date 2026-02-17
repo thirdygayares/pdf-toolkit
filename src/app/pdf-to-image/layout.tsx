@@ -55,6 +55,11 @@ export const metadata: Metadata = {
     },
 };
 
+/**
+ * Layout component for the PDF-to-image page that renders its children.
+ *
+ * @returns The rendered page content passed as `children`.
+ */
 export default function PdfToImageLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return <>{children}</>;
 }
