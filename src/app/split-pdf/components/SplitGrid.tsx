@@ -16,6 +16,8 @@ interface SplitGridProps {
     onToggle: (idx: number) => void
     onReorder: (startIndex: number, endIndex: number) => void
     columns: 1 | 2 | 3 | 4 | 5
+    onPreview?: (pageNumber: number) => void
+    onDocumentReady?: (doc: PDFDocumentProxy) => void
 }
 
 const getWidth = (columns: 1 | 2 | 3 | 4 | 5) => {
@@ -35,7 +37,18 @@ const getWidth = (columns: 1 | 2 | 3 | 4 | 5) => {
     }
 }
 
-export const SplitGrid = ({ pageCount, checked, order, pageOrigins, onToggle, onReorder, columns, file }: SplitGridProps) => {
+export const SplitGrid = ({
+    pageCount,
+    checked,
+    order,
+    pageOrigins,
+    onToggle,
+    onReorder,
+    columns,
+    file,
+    onPreview,
+    onDocumentReady,
+}: SplitGridProps) => {
     const [doc, setDoc] = useState<PDFDocumentProxy | null>(null)
 
     const gridClassName = useMemo(() => {
@@ -76,9 +89,7 @@ export const SplitGrid = ({ pageCount, checked, order, pageOrigins, onToggle, on
         ;(async () => {
             try {
                 const pdfModule = await import("pdfjs-dist/build/pdf")
-                const worker = await import("pdfjs-dist/build/pdf.worker.min.js?url")
-
-                pdfModule.GlobalWorkerOptions.workerSrc = worker.default
+                pdfModule.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js"
 
                 const bytes = await file.arrayBuffer()
                 const task = pdfModule.getDocument({ data: bytes })
@@ -86,6 +97,7 @@ export const SplitGrid = ({ pageCount, checked, order, pageOrigins, onToggle, on
 
                 if (!cancelled) {
                     setDoc(proxy)
+                    onDocumentReady?.(proxy)
                 }
             } catch (error) {
                 console.error("Failed to load PDF thumbnails:", error)
@@ -98,7 +110,7 @@ export const SplitGrid = ({ pageCount, checked, order, pageOrigins, onToggle, on
         return () => {
             cancelled = true
         }
-    }, [file])
+    }, [file, onDocumentReady])
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
@@ -122,6 +134,7 @@ export const SplitGrid = ({ pageCount, checked, order, pageOrigins, onToggle, on
                                                     pageIndex={pageIndex}
                                                     selected={checked[pageIndex] ?? false}
                                                     onToggle={onToggle}
+                                                    onPreview={onPreview}
                                                     width={thumbWidth}
                                                     dragHandleProps={draggableProvided.dragHandleProps}
                                                     sourceLabel={pageOrigins[pageIndex]?.sourceName}
