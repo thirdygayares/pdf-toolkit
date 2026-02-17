@@ -42,6 +42,14 @@ export const tools: Tool[] = [
         href: "/pdf-extract-image",
     },
     {
+        id: "pdf-to-image",
+        name: "PDF to Image",
+        description: "Convert full PDF pages into JPG or PNG files with DPI controls.",
+        icon: "ImagePlus",
+        available: true,
+        href: "/pdf-to-image",
+    },
+    {
         id: "image-pdf",
         name: "Image to PDF",
         description: "Combine multiple images into one PDF with page setup controls.",

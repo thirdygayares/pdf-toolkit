@@ -1,17 +1,14 @@
-declare module "pdfjs-dist/build/pdf.mjs" {
-    const pdfjsLib: any;
-    export default pdfjsLib;
-    export = pdfjsLib;
+declare module "pdfjs-dist/build/pdf" {
+    import type { PDFDocumentLoadingTask } from "pdfjs-dist/types/src/display/api";
+
+    export const GlobalWorkerOptions: {
+        workerSrc: string;
+    };
+
+    export function getDocument(src: unknown): PDFDocumentLoadingTask;
 }
 
-// Tell TS what a “?url” import returns.
-declare module "pdfjs-dist/build/pdf.worker.mjs?url" {
-    const src: string;
-    export default src;
-}
-
-// (Optional) generic helper if you import other .mjs files as URLs
-declare module "*.mjs?url" {
+declare module "pdfjs-dist/build/pdf.worker.min.js?url" {
     const src: string;
     export default src;
 }
