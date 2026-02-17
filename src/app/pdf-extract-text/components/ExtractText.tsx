@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Separator } from "@/components/ui/separator"
+import { FAQ } from "@/components/FAQ"
 import { FileText, Upload, Download, Copy, CheckCircle, AlertCircle, Loader2, RefreshCw } from "lucide-react"
 import {useExtractText} from "@/hooks/useExtractText";
-import {ExtractTextFAQ} from "@/components/faqs/FaqExtractText";
+import { ExtractTextFAQS } from "@/components/faqs/FaqExtractText";
 
 
 export function ExtractText() {
@@ -255,7 +256,14 @@ export function ExtractText() {
                 {/* FAQ Section */}
                 <div className="mt-16">
                     <Separator className="mb-12" />
-                    <ExtractTextFAQ />
+                    <FAQ
+                        items={ExtractTextFAQS}
+                        title="❓ FAQ"
+                        description="Common questions about PDF text extraction"
+                        richResults
+                        accordionType="multiple"
+                        collapsible
+                    />
                 </div>
             </div>
         </div>
