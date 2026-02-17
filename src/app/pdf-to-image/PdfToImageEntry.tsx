@@ -6,6 +6,11 @@ const PdfToImageClientPage = dynamic(() => import("./components/PdfToImageClient
     ssr: false,
 });
 
+/**
+ * Renders the client-only PDF-to-image page component.
+ *
+ * @returns The JSX element that mounts the client-side PdfToImageClientPage.
+ */
 export default function PdfToImageEntry() {
     return <PdfToImageClientPage />;
 }
