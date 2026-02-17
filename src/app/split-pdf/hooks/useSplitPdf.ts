@@ -2,6 +2,8 @@ import { useCallback, useMemo, useRef, useState } from "react"
 import { PDFDocument } from "pdf-lib"
 import { bytesToBase64 } from "@/lib/bytesToBase64"
 
+const toArrayBuffer = (bytes: Uint8Array<ArrayBufferLike>) => Uint8Array.from(bytes).buffer
+
 export type SplitState = {
     file: File | null
     sourceNames: string[]
@@ -89,7 +91,7 @@ export const useSplitPdf = () => {
             }
 
             setState({
-                file: new File([mergedBytes], outputName, { type: "application/pdf" }),
+                file: new File([toArrayBuffer(mergedBytes)], outputName, { type: "application/pdf" }),
                 sourceNames: pdfFiles.map((file) => file.name),
                 pageOrigins,
                 pageCount,
@@ -148,6 +150,22 @@ export const useSplitPdf = () => {
             ...prev,
             checked: prev.checked.map((value) => !value),
         }))
+    }, [])
+
+    const setCheckedPages = useCallback((pages: number[]) => {
+        setState((prev) => {
+            const include = new Set(
+                pages
+                    .filter((page) => Number.isInteger(page) && page >= 1 && page <= prev.pageCount)
+                    .map((page) => page - 1),
+            )
+
+            return {
+                ...prev,
+                checked: prev.checked.map((_, index) => include.has(index)),
+                error: null,
+            }
+        })
     }, [])
 
     const reorderPages = useCallback((startIndex: number, endIndex: number) => {
@@ -216,6 +234,7 @@ export const useSplitPdf = () => {
         toggle,
         setAll,
         invert,
+        setCheckedPages,
         reorderPages,
         splitPdf,
         includedCount,

@@ -4,7 +4,7 @@ import { memo, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import type { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api"
 import type { DraggableProvidedDragHandleProps } from "@hello-pangea/dnd"
-import { GripVertical } from "lucide-react"
+import { GripVertical, Search } from "lucide-react"
 
 interface PdfThumbnailProps {
     doc: PDFDocumentProxy
@@ -12,6 +12,7 @@ interface PdfThumbnailProps {
     pageIndex: number
     selected: boolean
     onToggle: (index: number) => void
+    onPreview?: (pageNumber: number) => void
     width?: number
     dragHandleProps?: DraggableProvidedDragHandleProps | null
     sourceLabel?: string
@@ -24,6 +25,7 @@ const PdfThumbnailComponent = ({
     pageIndex,
     selected,
     onToggle,
+    onPreview,
     width = 220,
     dragHandleProps,
     sourceLabel,
@@ -76,6 +78,21 @@ const PdfThumbnailComponent = ({
                 selected ? "border-primary ring-2 ring-primary/70" : "border-border/80 hover:border-primary/40",
             )}
         >
+            {onPreview && (
+                <button
+                    type="button"
+                    onClick={(event) => {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        onPreview(pageNumber)
+                    }}
+                    className="absolute right-11 top-2 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/70 bg-background/95 text-muted-foreground shadow-sm transition-colors hover:text-foreground"
+                    aria-label={`Preview page ${pageNumber}`}
+                >
+                    <Search className="h-4 w-4" />
+                </button>
+            )}
+
             <button
                 type="button"
                 {...dragHandleProps}
