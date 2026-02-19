@@ -58,6 +58,15 @@ export const tools: Tool[] = [
         href: "/image-pdf",
     },
     {
+        id: "markdown-pdf",
+        name: "Markdown to PDF",
+        description: "Convert Markdown docs with code, diagrams, and math into publication-ready PDFs.",
+        icon: "FileCode",
+        available: false,
+        comingSoon: true,
+        href: "/markdown-pdf",
+    },
+    {
         id: "compress",
         name: "Compress PDF",
         description: "Reduce PDF file size while maintaining quality.",
