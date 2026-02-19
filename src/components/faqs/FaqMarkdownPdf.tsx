@@ -8,27 +8,13 @@ export const MarkdownPdfFAQS: FAQItem[] = [
             <>
                 It is a browser-based tool that converts Markdown documents into
                 publication-ready PDFs. It supports syntax-highlighted code blocks,
-                Mermaid.js diagrams, KaTeX math equations, GitHub Flavored Markdown,
+                KaTeX math equations, GitHub Flavored Markdown,
                 and precise page layout controls—all without uploading your files to
                 a server.
             </>
         ),
         answerPlain:
-            "A browser-based tool that converts Markdown documents into publication-ready PDFs with syntax highlighting, Mermaid diagrams, KaTeX math, and page layout controls—without any server uploads.",
-    },
-    {
-        id: "diagrams",
-        question: "How do Mermaid diagrams work in the PDF?",
-        answer: (
-            <>
-                Wrap your Mermaid definition in a fenced code block tagged{" "}
-                <code>```mermaid</code>. The converter renders the diagram as a vector
-                graphic embedded inside the PDF, so it scales to any size without
-                pixelation.
-            </>
-        ),
-        answerPlain:
-            "Wrap your Mermaid definition in a ```mermaid code block. The converter renders it as a vector graphic embedded inside the PDF.",
+            "A browser-based tool that converts Markdown documents into publication-ready PDFs with syntax highlighting, KaTeX math, and page layout controls—without any server uploads.",
     },
     {
         id: "math",

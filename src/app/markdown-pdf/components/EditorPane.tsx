@@ -1,8 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { RotateCcw, Trash2 } from "lucide-react";
-
 export const SAMPLE_MARKDOWN = `# Technical User Manual
 
 ## Introduction
@@ -23,17 +20,6 @@ Inline: $ E = mc^2 $
 Display:
 $$ \\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2} $$
 
-## Mermaid Diagram
-
-\`\`\`mermaid
-graph TD
-    A[Upload Markdown] --> B{Has Diagrams?}
-    B -- Yes --> C[Render Mermaid]
-    B -- No --> D[Skip]
-    C --> E[Export PDF]
-    D --> E
-\`\`\`
-
 ## Task List
 
 - [x] Syntax highlighting
@@ -45,8 +31,9 @@ graph TD
 
 | Feature      | Status      | Notes             |
 |--------------|-------------|-------------------|
-| Mermaid.js   | Supported   | Vector output     |
+| Code blocks  | Supported   | Fenced syntax     |
 | KaTeX        | Supported   | Inline & display  |
+| Page Breaks  | Supported   | Manual markers    |
 | Custom CSS   | Coming Soon | Advanced option   |
 
 <!-- pagebreak -->
@@ -62,36 +49,21 @@ Content pushed to next page via the page break above.
 interface EditorPaneProps {
     value: string;
     onChange: (value: string) => void;
+    /** When true, fills parent height (used in resizable split layout) */
+    fullHeight?: boolean;
 }
 
-export const EditorPane: React.FC<EditorPaneProps> = ({ value, onChange }) => {
+export const EditorPane: React.FC<EditorPaneProps> = ({ value, onChange, fullHeight }) => {
+    const lineCount = value ? value.split("\n").length : 0;
+
     return (
-        <div className="flex flex-col border rounded-xl overflow-hidden bg-card">
+        <div className={`flex flex-col border-r bg-card ${fullHeight ? "h-full" : "border rounded-xl overflow-hidden"}`}>
             {/* Toolbar */}
-            <div className="flex items-center justify-between px-3 py-2 border-b bg-muted/40">
+            <div className="flex items-center justify-between gap-2 px-3 py-2 border-b bg-muted/40 flex-shrink-0">
                 <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
                     Markdown Editor
                 </span>
-                <div className="flex items-center gap-1">
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 px-2 text-xs gap-1"
-                        onClick={() => onChange(SAMPLE_MARKDOWN)}
-                    >
-                        <RotateCcw className="h-3 w-3" />
-                        Reset
-                    </Button>
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 px-2 text-xs gap-1"
-                        onClick={() => onChange("")}
-                    >
-                        <Trash2 className="h-3 w-3" />
-                        Clear
-                    </Button>
-                </div>
+                <span className="text-[11px] text-muted-foreground">{lineCount} {lineCount === 1 ? "line" : "lines"}</span>
             </div>
 
             {/* Textarea */}
@@ -102,7 +74,7 @@ export const EditorPane: React.FC<EditorPaneProps> = ({ value, onChange }) => {
                 autoCorrect="off"
                 autoCapitalize="none"
                 placeholder="Type or paste your Markdown here…"
-                className="flex-1 resize-none p-4 text-sm font-mono bg-background text-foreground placeholder:text-muted-foreground focus:outline-none min-h-80"
+                className="flex-1 resize-none p-4 text-sm font-mono bg-background text-foreground placeholder:text-muted-foreground focus:outline-none min-h-80 h-full"
             />
         </div>
     );

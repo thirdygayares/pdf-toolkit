@@ -62,8 +62,7 @@ export const tools: Tool[] = [
         name: "Markdown to PDF",
         description: "Convert Markdown docs with code, diagrams, and math into publication-ready PDFs.",
         icon: "FileCode",
-        available: false,
-        comingSoon: true,
+        available: true,
         href: "/markdown-pdf",
     },
     {
