@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
 import type { Theme } from "./PreviewPane";
-import { toast } from "sonner";
+import { Construction } from "lucide-react";
 
 // ---------- Types ----------
 type PageFormat = "A4" | "Letter" | "Legal";
@@ -116,6 +117,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
     const [author, setAuthor] = useState("");
     const [justifyText, setJustifyText] = useState(false);
     const [avoidRowSplit, setAvoidRowSplit] = useState(true);
+    const [showExportAlert, setShowExportAlert] = useState(false);
 
     function toggleFeature(id: string) {
         setEnabledFeatures((prev) => {
@@ -127,15 +129,19 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
     }
 
     function handleExport() {
-        toast.info("Export coming soon", {
-            description:
-                "The Markdown to PDF export feature is currently in development.",
-        });
+        setShowExportAlert(true);
     }
 
     return (
-        <div className="border rounded-xl bg-card p-5 space-y-6">
-            <h2 className="text-lg font-bold text-foreground">Configuration</h2>
+        <section className="rounded-2xl border border-border/80 bg-card p-5 sm:p-6 lg:p-8 space-y-6">
+            <div>
+                <h2 className="text-xl font-semibold tracking-tight text-foreground">
+                    Export Configuration
+                </h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                    Set your theme, layout, and metadata before exporting to PDF.
+                </p>
+            </div>
 
             {/* Theme */}
             <div className="space-y-3">
@@ -265,7 +271,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
             </div>
 
             {/* Page break info */}
-            <div className="rounded-lg bg-muted/50 border border-border p-4 space-y-1.5">
+            <div className="rounded-lg bg-muted/50 border border-border/70 p-4 space-y-1.5">
                 <p className="text-sm font-semibold text-foreground">Page Breaks</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                     Insert{" "}
@@ -281,22 +287,35 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                 </p>
             </div>
 
+            {/* Coming soon alert — shown on export click */}
+            {showExportAlert && (
+                <Alert className="border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30">
+                    <Construction className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                    <AlertDescription className="text-amber-800 dark:text-amber-300 text-sm">
+                        <span className="font-semibold">Export is coming soon.</span> The Markdown to PDF
+                        renderer is currently in development. Your configuration above is saved and will
+                        be applied when the feature launches.
+                    </AlertDescription>
+                </Alert>
+            )}
+
             {/* Export button */}
-            <div className="space-y-2">
+            <div className="space-y-2 pt-1">
                 <Button
                     className="w-full h-11 text-base font-bold"
                     onClick={handleExport}
                 >
                     Export PDF
                 </Button>
-                <p className="text-xs text-muted-foreground text-center">
-                    This feature is in development. Export will generate a full PDF using
-                    the selected theme and settings.{" "}
-                    <Badge variant="secondary" className="text-[10px]">
-                        Coming Soon
-                    </Badge>
-                </p>
+                {!showExportAlert && (
+                    <p className="text-xs text-muted-foreground text-center">
+                        Generates a full PDF using the selected theme, features, and metadata.{" "}
+                        <Badge variant="secondary" className="text-[10px]">
+                            Coming Soon
+                        </Badge>
+                    </p>
+                )}
             </div>
-        </div>
+        </section>
     );
 };
