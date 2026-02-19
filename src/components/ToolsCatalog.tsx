@@ -15,7 +15,7 @@ export const ToolsCatalog = () => {
 
     const availableTools = tools.filter((tool) => tool.available)
     const comingSoonTools = tools.filter((tool) => !tool.available).slice(0, 2)
-    const popularTools = [...availableTools, ...comingSoonTools].slice(0, 6)
+    const popularTools = [...availableTools, ...comingSoonTools].slice(0, 100)
 
     return (
         <section id="tools" className="relative py-16 sm:py-20 lg:py-24">
