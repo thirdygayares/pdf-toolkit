@@ -46,8 +46,8 @@ export function useExtractText(): UseExtractTextReturn {
                 charCount: trimmed.length,
                 fileName: file.name,
             })
-        } catch (err: any) {
-            console.error("Error extracting text:", err)
+        } catch (error) {
+            console.error("Error extracting text:", error)
             setError("Failed to extract text from PDF.")
         } finally {
             setIsExtracting(false)

@@ -26,15 +26,16 @@ export const ExtractTextFAQS: FAQItem[] = [
         question: "Can I upload more than one PDF at once?",
         answer: (
             <>
-                No, this page supports only single file uploads. However, you can use our{" "}
+                Yes. You can upload multiple PDFs, reorder files and pages, then extract text from only the pages you select.
+                If needed, you can still use our{" "}
                 <Link className="underline font-extrabold text-primary" href="/merge-pdf">
                     Merge PDF Tool
                 </Link>{" "}
-                to combine multiple PDFs into one, then upload the merged file here for text extraction.
+                for a dedicated merge workflow.
             </>
         ),
         answerPlain:
-            "No, this page supports only single file uploads. You can use the Merge PDF Tool to combine multiple PDFs into one, then upload the merged file here for text extraction.",
+            "Yes. You can upload multiple PDFs, reorder files and pages, then extract text from only the pages you select.",
     },
     {
         id: "ocr",
