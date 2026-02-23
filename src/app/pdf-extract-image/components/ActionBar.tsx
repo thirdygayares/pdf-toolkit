@@ -28,34 +28,42 @@ export const ActionBar = ({
     const hasItems = total > 0;
     const hasSelected = selected > 0;
 
+    if (!hasItems) {
+        return null;
+    }
+
     return (
-        <div className="rounded-xl border border-border/80 bg-card p-3 sm:p-4">
-            <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="secondary" className="border-primary/20 bg-primary/10 text-primary">
-                    {selected} selected / {total} images
-                </Badge>
+        <div className="pointer-events-none fixed inset-x-0 bottom-3 z-40 px-3 sm:px-4">
+            <div className="pointer-events-auto mx-auto max-w-6xl rounded-2xl border border-border/80 bg-background/95 shadow-xl backdrop-blur">
+                <div className="overflow-x-auto">
+                    <div className="flex w-max min-w-full items-center gap-2 px-3 py-3 sm:px-4">
+                        <Badge variant="secondary" className="shrink-0 border-primary/20 bg-primary/10 text-primary">
+                            {selected} selected / {total} images
+                        </Badge>
 
-                <Button type="button" variant="outline" size="sm" onClick={() => setAll(true)} disabled={!hasItems || busy}>
-                    <Check className="mr-2 h-4 w-4" /> Select all
-                </Button>
-                <Button type="button" variant="outline" size="sm" onClick={() => setAll(false)} disabled={!hasItems || busy}>
-                    <RefreshCw className="mr-2 h-4 w-4 rotate-180" /> Unselect all
-                </Button>
-                <Button type="button" variant="outline" size="sm" onClick={invert} disabled={!hasItems || busy}>
-                    <RefreshCw className="mr-2 h-4 w-4" /> Invert
-                </Button>
-                <Button type="button" variant="outline" size="sm" onClick={deleteSelected} disabled={!hasSelected || busy}>
-                    <Trash2 className="mr-2 h-4 w-4" /> Delete selected
-                </Button>
+                        <Button type="button" variant="outline" size="sm" onClick={() => setAll(true)} disabled={!hasItems || busy}>
+                            <Check className="mr-2 h-4 w-4" /> Select all
+                        </Button>
+                        <Button type="button" variant="outline" size="sm" onClick={() => setAll(false)} disabled={!hasItems || busy}>
+                            <RefreshCw className="mr-2 h-4 w-4 rotate-180" /> Unselect all
+                        </Button>
+                        <Button type="button" variant="outline" size="sm" onClick={invert} disabled={!hasItems || busy}>
+                            <RefreshCw className="mr-2 h-4 w-4" /> Invert
+                        </Button>
+                        <Button type="button" variant="outline" size="sm" onClick={deleteSelected} disabled={!hasSelected || busy}>
+                            <Trash2 className="mr-2 h-4 w-4" /> Delete selected
+                        </Button>
 
-                <div className="hidden h-6 w-px bg-border sm:block" />
+                        <div className="mx-1 h-6 w-px shrink-0 bg-border" />
 
-                <Button type="button" size="sm" onClick={downloadSelected} disabled={!hasSelected || busy}>
-                    <Download className="mr-2 h-4 w-4" /> Zip selected
-                </Button>
-                <Button type="button" variant="secondary" size="sm" onClick={downloadAll} disabled={!hasItems || busy}>
-                    <Download className="mr-2 h-4 w-4" /> Zip all
-                </Button>
+                        <Button type="button" size="sm" onClick={downloadSelected} disabled={!hasSelected || busy}>
+                            <Download className="mr-2 h-4 w-4" /> Download selected
+                        </Button>
+                        <Button type="button" variant="secondary" size="sm" onClick={downloadAll} disabled={!hasItems || busy}>
+                            <Download className="mr-2 h-4 w-4" /> Download all
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
     );

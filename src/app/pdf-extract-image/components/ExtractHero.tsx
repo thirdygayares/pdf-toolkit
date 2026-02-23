@@ -19,7 +19,7 @@ export const ExtractHero = () => {
                 Extract images from PDF with a single-page workflow
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Upload one PDF, extract images locally in your browser, review the results, and export only the images you want.
+                Upload one or multiple PDFs, extract images locally in your browser, review the results, and export only the images you want.
             </p>
 
             <div className="mt-5 grid gap-2.5 sm:grid-cols-2">

@@ -13,6 +13,8 @@ import { Files, Images, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import { UploadSingle } from "@/app/split-pdf/components/UploadHero";
 import { ExtractHero } from "./components/ExtractHero";
 import { ActionBar } from "./components/ActionBar";
+import { UseCasesSection } from "./components/UseCasesSection";
+import { ExtractImageFaqSection } from "./components/ExtractImageFaqSection";
 import { ImagePreviewDialog } from "./components/ImagePreviewDialog";
 import { ImageTile } from "./components/ImageTile";
 import { useExtractImages } from "./hooks/useExtractImages";
@@ -82,18 +84,16 @@ export default function PdfExtractImagePage() {
 
             <main className="container mx-auto px-4 py-6 sm:py-10">
                 <section className="mx-auto max-w-6xl space-y-6 sm:space-y-8">
-                    <ExtractHero />
-
                     <Card className="rounded-2xl border-border/80 shadow-sm">
                         <CardHeader className="space-y-3">
                             <div className="flex flex-wrap items-start justify-between gap-3">
                                 <div className="space-y-1">
                                     <CardTitle className="flex items-center gap-2 text-xl sm:text-2xl">
                                         <Images className="h-5 w-5 text-primary" />
-                                        Extract images (local-only)
+                                        Extract images
                                     </CardTitle>
                                     <p className="text-sm text-muted-foreground">
-                                        Single-page workflow like Merge PDF: upload one or many PDFs, extract, review, delete, and download in one screen.
+                                        Upload one or many PDFs, extract, review, delete, and download in one screen.
                                     </p>
                                 </div>
                                 <div className="flex flex-wrap items-center gap-2">
@@ -217,17 +217,6 @@ export default function PdfExtractImagePage() {
                                 </div>
                             </div>
 
-                            <ActionBar
-                                total={state.items.length}
-                                selected={selectedCount}
-                                busy={state.busy}
-                                setAll={setAll}
-                                invert={invert}
-                                deleteSelected={handleRemoveSelected}
-                                downloadSelected={downloadSelectedZip}
-                                downloadAll={downloadAllZip}
-                            />
-
                             {state.items.length === 0 && !state.busy && state.docs.length > 0 ? (
                                 <Card className="rounded-xl border-border/80">
                                     <CardContent className="py-10 text-center">
@@ -240,31 +229,50 @@ export default function PdfExtractImagePage() {
                             ) : null}
 
                             {state.items.length > 0 ? (
-                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                    {state.items.map((item) => (
-                                        <ImageTile
-                                            key={item.id}
-                                            id={item.id}
-                                            src={item.previewUrl}
-                                            name={item.name}
-                                            sourceName={item.sourceName}
-                                            page={item.page}
-                                            selected={item.selected}
-                                            width={item.width}
-                                            height={item.height}
-                                            sizeLabel={formatBytes(item.bytes)}
-                                            onToggle={() => toggle(item.id)}
-                                            onPreview={() => setPreviewId(item.id)}
-                                            onDownload={() => void downloadSingle(item.id)}
-                                            onDelete={() => handleRemoveItem(item.id)}
-                                        />
-                                    ))}
-                                </div>
+                                <>
+                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                        {state.items.map((item) => (
+                                            <ImageTile
+                                                key={item.id}
+                                                id={item.id}
+                                                src={item.previewUrl}
+                                                name={item.name}
+                                                sourceName={item.sourceName}
+                                                page={item.page}
+                                                selected={item.selected}
+                                                width={item.width}
+                                                height={item.height}
+                                                sizeLabel={formatBytes(item.bytes)}
+                                                onToggle={() => toggle(item.id)}
+                                                onPreview={() => setPreviewId(item.id)}
+                                                onDownload={() => void downloadSingle(item.id)}
+                                                onDelete={() => handleRemoveItem(item.id)}
+                                            />
+                                        ))}
+                                    </div>
+                                    <div className="h-24 sm:h-28" />
+                                </>
                             ) : null}
                         </section>
                     ) : null}
+
+                    <ExtractHero />
+                    <UseCasesSection />
+
+                    <ExtractImageFaqSection />
                 </section>
             </main>
+
+            <ActionBar
+                total={state.items.length}
+                selected={selectedCount}
+                busy={state.busy}
+                setAll={setAll}
+                invert={invert}
+                deleteSelected={handleRemoveSelected}
+                downloadSelected={downloadSelectedZip}
+                downloadAll={downloadAllZip}
+            />
 
             <ImagePreviewDialog
                 item={previewItem}
