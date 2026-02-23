@@ -9,7 +9,15 @@ export interface Tool {
 }
 
 export const tools: Tool[] = [
+  {
+    id: "pdf-editor",
+    name: "Pdf Editor",
+    description: "Pdf Editor is a powerful PDF editor that lets you edit, rotate, and add text to PDFs.",
+    icon: "Editor",
+    available: true,
+    href: "/pdf-editor",
 
+  },
     {
         id: "merge",
         name: "Merge PDF",
@@ -91,14 +99,17 @@ export const tools: Tool[] = [
         available: false,
         comingSoon: true,
     },
-    {
-      id: "pdf-editor",
-      name: "Pdf Editor",
-      description: "Pdf Editor is a powerful PDF editor that lets you edit, rotate, and add text to PDFs.",
-      icon: "Editor",
-      available: true,
-      href: "/pdf-editor",
+  {
+    id: "page-number",
+    name: "Page Number PDF",
+    description: "Add page numbers and customize their position and format across your PDF pages.",
+    icon: "FileDigit",
+    available: true,
+    href: "/page-number-pdf",
 
-    },
+  },
+
+
+
 
 ]
