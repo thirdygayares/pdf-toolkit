@@ -41,24 +41,25 @@ export const ImagePreviewDialog = ({ item, open, onOpenChange, onDownload, onDel
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent
                 key={item?.id ?? "empty"}
-                className={cn("max-h-[94vh] p-0", dialogWidthClass[widthPreset])}
+                className={cn("max-h-[95svh] overflow-hidden p-0", dialogWidthClass[widthPreset])}
                 showCloseButton
             >
                 {item ? (
                     <>
-                        <DialogHeader className="border-b px-4 pt-4 pb-3 sm:px-5 sm:pt-5 sm:pb-4">
-                            <DialogTitle className="truncate pr-8 text-xl">{item.name}</DialogTitle>
-                            <DialogDescription className="truncate">
+                        <DialogHeader className="border-b px-4 pt-4 pb-3 text-left sm:px-5 sm:pt-5 sm:pb-4">
+                            <DialogTitle className="pr-10 text-lg leading-tight break-all sm:text-xl sm:truncate">{item.name}</DialogTitle>
+                            <DialogDescription className="pr-10 text-xs leading-relaxed break-words sm:text-sm sm:truncate">
                                 {item.sourceName} • Page {item.page} • {item.width}×{item.height}px
                             </DialogDescription>
                         </DialogHeader>
 
-                        <div className="flex flex-col gap-3 border-b px-4 py-3 sm:px-5">
-                            <div className="flex flex-wrap items-center gap-2">
+                        <div className="flex flex-col gap-3 border-b px-3 py-3 sm:px-5">
+                            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
                                 <Button
                                     type="button"
                                     variant="outline"
                                     size="sm"
+                                    className="justify-center sm:justify-start"
                                     onClick={() => setZoom((value) => Math.max(MIN_ZOOM, Number((value - STEP).toFixed(2))))}
                                     disabled={zoom <= MIN_ZOOM}
                                 >
@@ -68,18 +69,25 @@ export const ImagePreviewDialog = ({ item, open, onOpenChange, onDownload, onDel
                                     type="button"
                                     variant="outline"
                                     size="sm"
+                                    className="justify-center sm:justify-start"
                                     onClick={() => setZoom((value) => Math.min(MAX_ZOOM, Number((value + STEP).toFixed(2))))}
                                     disabled={zoom >= MAX_ZOOM}
                                 >
                                     <ZoomIn className="mr-2 h-4 w-4" /> Zoom in
                                 </Button>
-                                <Button type="button" variant="ghost" size="sm" onClick={() => setZoom(1)}>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    className="col-span-2 justify-center sm:col-auto sm:justify-start"
+                                    onClick={() => setZoom(1)}
+                                >
                                     <RotateCcw className="mr-2 h-4 w-4" /> Reset ({Math.round(zoom * 100)}%)
                                 </Button>
                             </div>
 
-                            <div className="flex flex-wrap items-center justify-between gap-2">
-                                <div className="flex flex-wrap items-center gap-1 rounded-lg border bg-muted/30 p-1">
+                            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                                <div className="hidden sm:flex sm:flex-wrap sm:items-center sm:gap-1 sm:rounded-lg sm:border sm:bg-muted/30 sm:p-1">
                                     <span className="px-2 text-xs font-medium text-muted-foreground">Dialog width</span>
                                     <WidthPresetButton
                                         active={widthPreset === "normal"}
@@ -90,14 +98,15 @@ export const ImagePreviewDialog = ({ item, open, onOpenChange, onDownload, onDel
                                     <WidthPresetButton active={widthPreset === "full"} onClick={() => setWidthPreset("full")} label="Full" />
                                 </div>
 
-                                <div className="flex flex-wrap items-center gap-2">
-                                    <Button type="button" variant="outline" size="sm" onClick={() => onDownload(item.id)}>
+                                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+                                    <Button type="button" variant="outline" size="sm" className="w-full" onClick={() => onDownload(item.id)}>
                                         <Download className="mr-2 h-4 w-4" /> Download
                                     </Button>
                                     <Button
                                         type="button"
                                         variant="destructive"
                                         size="sm"
+                                        className="w-full"
                                         onClick={() => {
                                             onDelete(item.id);
                                             onOpenChange(false);
@@ -109,14 +118,14 @@ export const ImagePreviewDialog = ({ item, open, onOpenChange, onDownload, onDel
                             </div>
                         </div>
 
-                        <div className="max-h-[calc(94vh-220px)] overflow-auto bg-muted/30 p-3 sm:p-4">
-                            <div className="mx-auto flex min-h-[260px] items-center justify-center rounded-xl border bg-background p-3 shadow-sm sm:min-h-[320px]">
-                                <div className="flex max-h-[calc(94vh-280px)] w-full items-center justify-center overflow-auto rounded-md border bg-muted/20 p-2">
+                        <div className="max-h-[calc(95svh-270px)] overflow-auto bg-muted/30 p-2.5 sm:max-h-[calc(95svh-220px)] sm:p-4">
+                            <div className="mx-auto flex min-h-[220px] items-center justify-center rounded-xl border bg-background p-2.5 shadow-sm sm:min-h-[320px] sm:p-3">
+                                <div className="flex max-h-[calc(95svh-340px)] w-full items-center justify-center overflow-auto rounded-md border bg-muted/20 p-2 sm:max-h-[calc(95svh-280px)]">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         src={item.previewUrl}
                                         alt={item.name}
-                                        className="block h-auto max-h-[calc(94vh-320px)] max-w-full rounded-md object-contain"
+                                        className="block h-auto max-h-[calc(95svh-380px)] max-w-full rounded-md object-contain sm:max-h-[calc(95svh-320px)]"
                                         style={{ transform: `scale(${zoom})`, transformOrigin: "center center" }}
                                     />
                                 </div>

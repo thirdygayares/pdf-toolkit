@@ -250,7 +250,7 @@ export default function PdfExtractImagePage() {
                                             />
                                         ))}
                                     </div>
-                                    <div className="h-24 sm:h-28" />
+                                    <div className="h-36 sm:h-28" />
                                 </>
                             ) : null}
                         </section>
