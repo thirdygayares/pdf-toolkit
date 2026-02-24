@@ -10,4 +10,4 @@ permissions:
 
 jobs:
   release:
-    uses: thirdygayares/github/.github/workflows/semantic-release.yml@main
+    uses: thirdygayares/thirdygithub/.github/workflows/semantic-release.yml@main
