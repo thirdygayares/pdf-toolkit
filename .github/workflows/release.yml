@@ -1,0 +1,13 @@
+name: Release
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    uses: thirdygayares/github/.github/workflows/semantic-release.yml@main
