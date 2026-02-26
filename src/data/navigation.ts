@@ -17,6 +17,7 @@ export const navigation: NavigationItem[] = [
             { name: "PDF to Image", href: "/pdf-to-image" },
             { name: "Image to PDF", href: "/image-pdf" },
             { name: "Markdown to PDF", href: "/markdown-pdf" },
+            { name: "Flow Builder", href: "/flow-builder" },
             { name: "Compress PDF", href: "/compress-pdf" },
             { name: "PDF Editor", href: "/pdf-editor" },
 
