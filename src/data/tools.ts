@@ -75,6 +75,14 @@ export const tools: Tool[] = [
         href: "/markdown-pdf",
     },
     {
+        id: "flow-builder",
+        name: "PDF Flow Builder",
+        description: "Build repeatable drag-and-drop PDF workflows for batch processing in your browser.",
+        icon: "Workflow",
+        available: true,
+        href: "/flow-builder",
+    },
+    {
         id: "compress",
         name: "Compress PDF",
         description: "Reduce PDF file size while maintaining quality.",
