@@ -108,6 +108,15 @@ export const tools: Tool[] = [
     href: "/page-number-pdf",
 
   },
+  {
+    id: "pdf-overlay",
+    name: "Pdf Overlay",
+    description: "Combine a base PDF and an overlay PDF on a single page workflow. Great for letterheads, branded templates, repeating stamps, and page-by-page overlays",
+    icon: "BookCopy",
+    available: true,
+    href: "/pdf-overlay",
+
+  },
 
 
 
