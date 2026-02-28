@@ -1701,10 +1701,10 @@ export function PdfEditorStudio() {
                   const selected = page.id === activePage?.id
 
                   return (
-                    <div key={page.id} className="mb-2" style={{ height: THUMBNAIL_ROW_HEIGHT - 8 }}>
+                    <div key={page.id} className="mb-2">
                       <div
                         className={cn(
-                          "rounded-xl border bg-background p-2 shadow-sm transition",
+                          "rounded-xl border bg-background p-2 shadow-sm transition my-2",
                           selected ? "border-primary ring-2 ring-primary/30" : "border-border/70",
                           draggedPageId === page.id && "opacity-50",
                         )}
