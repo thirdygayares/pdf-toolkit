@@ -1,3 +1,5 @@
+This project is tested with BrowserStack
+
 # PDF Toolkit
 
 > Free, secure, in-browser PDF merging, splitting, compression, and text extraction—100% privacy, no uploads on server.  
