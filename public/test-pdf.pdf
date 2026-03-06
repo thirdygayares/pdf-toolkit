@@ -1,0 +1,476 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2755905511811534 841.8897637795276978]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 3545
+>>
+stream
+0.5670000000000001 w
+0 G
+1. g
+0. 841.8897637795276978 595.2755905511811534 -841.8897637795276978 re
+f
+BT
+/F2 21 Tf
+24.1499999999999986 TL
+0.067 0.094 0.153 rg
+45.354330708661422 785.7637795275592225 Td
+(Technical User Manual) Tj
+ET
+0.9 0.91 0.92 RG
+45.354330708661422 753.2775425196850847 m
+549.9212598425197029 753.2775425196850847 l
+S
+BT
+/F2 17 Tf
+19.5499999999999972 TL
+0.067 0.094 0.153 rg
+45.354330708661422 739.2566732598426142 Td
+(Introduction) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+45.354330708661422 708.8046882519686278 Td
+(This document demonstrates the Markdown to PDF converter capabilities.) Tj
+ET
+0.95 0.96 0.96 rg
+0.9 0.91 0.92 RG
+45.354330708661422 685.7046737007874526 504.5669291338583093 -77.7224820472441138 re
+B
+BT
+/F5 9 Tf
+10.3499999999999996 TL
+0.122 0.161 0.216 rg
+52.4409448818897701 667.9934460000000627 Td
+([python]) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.122 0.161 0.216 rg
+52.4409448818897701 656.743438913385944 Td
+(def greet\(name: str\) -> str:) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.122 0.161 0.216 rg
+52.4409448818897701 643.2434304094489335 Td
+(    return f"Hello, {name}!") Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.122 0.161 0.216 rg
+52.4409448818897701 616.2434134015749123 Td
+(print\(greet\("World"\)\)) Tj
+ET
+BT
+/F2 17 Tf
+19.5499999999999972 TL
+0.067 0.094 0.153 rg
+45.354330708661422 591.1266767244094353 Td
+(Math Equations) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+45.354330708661422 560.6746917165355626 Td
+(Inline: $ E = mc^2 $) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+45.354330708661422 537.5746771653543874 Td
+(Display: $$ \\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2} $$) Tj
+ET
+BT
+/F2 17 Tf
+19.5499999999999972 TL
+0.067 0.094 0.153 rg
+45.354330708661422 511.0730878110236972 Td
+(Task List) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+51.0236220472441033 480.6211028031497108 Td
+([x] Syntax highlighting) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+51.0236220472441033 463.5710920629922498 Td
+([x] Math equations) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+51.0236220472441033 446.5210813228347888 Td
+([ ] Custom CSS themes) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+51.0236220472441033 429.4710705826773278 Td
+([ ] PlantUML support) Tj
+ET
+BT
+/F2 17 Tf
+19.5499999999999972 TL
+0.067 0.094 0.153 rg
+45.354330708661422 401.2348362519687157 Td
+(Table) Tj
+ET
+0.98 0.98 0.98 rg
+0.9 0.91 0.92 RG
+45.354330708661422 370.7828512440946724 504.5669291338583093 -104.7224990551181207 re
+B
+BT
+/F5 9 Tf
+10.3499999999999996 TL
+0.067 0.094 0.153 rg
+52.4409448818897701 353.0716235433073393 Td
+([table]) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.067 0.094 0.153 rg
+52.4409448818897701 341.8216164566931639 Td
+(Feature | Status | Notes) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.067 0.094 0.153 rg
+52.4409448818897701 328.3216079527561533 Td
+(--- | --- | ---) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.067 0.094 0.153 rg
+52.4409448818897701 314.8215994488191427 Td
+(Code blocks | Supported | Fenced syntax) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.067 0.094 0.153 rg
+52.4409448818897701 301.3215909448821321 Td
+(KaTeX | Supported | Inline & display) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.067 0.094 0.153 rg
+52.4409448818897701 287.8215824409450079 Td
+(Page Breaks | Supported | Manual markers) Tj
+ET
+BT
+/F5 10 Tf
+11.5 TL
+0.067 0.094 0.153 rg
+52.4409448818897701 274.3215739370079973 Td
+(Custom CSS | Coming Soon | Advanced option) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.612 0.639 0.686 rg
+289.3927952755905721 19.8425196850394059 Td
+(1 / 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2755905511811534 841.8897637795276978]
+/Contents 6 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 941
+>>
+stream
+0.5670000000000001 w
+0.9 0.91 0.92 RG
+1. g
+0. 841.8897637795276978 595.2755905511811534 -841.8897637795276978 re
+f
+BT
+/F2 17 Tf
+19.5499999999999972 TL
+0.067 0.094 0.153 rg
+45.354330708661422 787.46456692913398 Td
+(Chapter 2) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.067 0.094 0.153 rg
+45.354330708661422 757.0125819212599936 Td
+(Content pushed to next page via the page break above.) Tj
+ET
+0.82 0.84 0.86 rg
+45.354330708661422 735.3298902047243928 2.5511811023622051 -34.70198768503937 re
+f
+BT
+/F3 10.5 Tf
+12.0749999999999993 TL
+0.42 0.447 0.502 rg
+56.6929133858267775 733.9125673700788184 Td
+(This is a blockquote demonstrating widow/orphan control. Headers will never be stranded at the) Tj
+ET
+BT
+/F3 10.5 Tf
+12.0749999999999993 TL
+0.42 0.447 0.502 rg
+56.6929133858267775 718.6875577795276513 Td
+(bottom of a page.) Tj
+ET
+BT
+/F1 8.5 Tf
+9.7749999999999986 TL
+0.612 0.639 0.686 rg
+289.3927952755905721 19.8425196850394059 Td
+(2 / 2) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R 5 0 R ]
+/Count 2
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+19 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+20 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 7 0 R
+/F2 8 0 R
+/F3 9 0 R
+/F4 10 0 R
+/F5 11 0 R
+/F6 12 0 R
+/F7 13 0 R
+/F8 14 0 R
+/F9 15 0 R
+/F10 16 0 R
+/F11 17 0 R
+/F12 18 0 R
+/F13 19 0 R
+/F14 20 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+21 0 obj
+<<
+/Producer (jsPDF 4.2.0)
+/CreationDate (D:20260306234011+08'00')
+>>
+endobj
+22 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 23
+0000000000 65535 f 
+0000004878 00000 n 
+0000006703 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000003749 00000 n 
+0000003886 00000 n 
+0000004941 00000 n 
+0000005066 00000 n 
+0000005196 00000 n 
+0000005329 00000 n 
+0000005467 00000 n 
+0000005591 00000 n 
+0000005720 00000 n 
+0000005852 00000 n 
+0000005988 00000 n 
+0000006116 00000 n 
+0000006243 00000 n 
+0000006372 00000 n 
+0000006505 00000 n 
+0000006607 00000 n 
+0000006953 00000 n 
+0000007039 00000 n 
+trailer
+<<
+/Size 23
+/Root 22 0 R
+/Info 21 0 R
+/ID [ <26B7CB542A298260EE991A615A8905EC> <26B7CB542A298260EE991A615A8905EC> ]
+>>
+startxref
+7143
+%%EOF
