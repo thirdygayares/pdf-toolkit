@@ -72,7 +72,12 @@ export interface TextAnnotation extends BoxAnnotationBase<"text"> {
   fontSize: number
   fontFamily: string
   whiteout: boolean
+  bold: boolean
+  italic: boolean
+  underline: boolean
 }
+
+export type ResizeDirection = "nw" | "n" | "ne" | "e" | "se" | "s" | "sw" | "w"
 
 export interface ImageAnnotation extends BoxAnnotationBase<"image"> {
   src: string
