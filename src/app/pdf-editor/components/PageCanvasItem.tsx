@@ -117,6 +117,33 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
     [effectiveTool, getNormalizedPoint, dragSessionRef, setSelectedAnnotationId, setActivePageWithoutHistory, page.id],
   )
 
+  const handleSelectableAnnotationKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLElement>, annotationId: string) => {
+      if (event.key !== "Enter" && event.key !== " ") return
+      event.preventDefault()
+      event.stopPropagation()
+      setSelectedAnnotationId(annotationId)
+      setActivePageWithoutHistory(page.id)
+    },
+    [page.id, setActivePageWithoutHistory, setSelectedAnnotationId],
+  )
+
+  const handleTextAnnotationKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLElement>, annotation: TextAnnotation) => {
+      if (event.key === "F2") {
+        event.preventDefault()
+        event.stopPropagation()
+        setSelectedAnnotationId(annotation.id)
+        setActivePageWithoutHistory(page.id)
+        startInlineEdit(annotation.id, annotation.text)
+        return
+      }
+
+      handleSelectableAnnotationKeyDown(event, annotation.id)
+    },
+    [handleSelectableAnnotationKeyDown, page.id, setActivePageWithoutHistory, setSelectedAnnotationId, startInlineEdit],
+  )
+
   // ─── Pointer handlers ─────────────────────────────────────────
   const beginOverlayInteraction = useCallback(
     (event: React.PointerEvent<HTMLDivElement>) => {
@@ -363,8 +390,6 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
 
   const endOverlayInteraction = useCallback(
     (event: React.PointerEvent<HTMLElement>) => {
-      const point = getNormalizedPoint(event)
-
       // Finish resize
       if (resizeSessionRef.current) {
         resizeSessionRef.current = null
@@ -408,10 +433,9 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
       dragSessionRef.current = null
       setDraftAnnotation(null)
       setDragPreview(null)
-      void point
     },
     [
-      getNormalizedPoint, dragPreview, draftAnnotation, page.id,
+      dragPreview, draftAnnotation, page.id,
       addAnnotation, updateAnnotation, setDraftAnnotation, setDragPreview,
       drawSessionRef, dragSessionRef, panSessionRef, resizeSessionRef,
     ],
@@ -483,6 +507,7 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
                   onPointerMove={moveOverlayInteraction}
                   onPointerUp={endOverlayInteraction}
                   onClick={(e) => { e.stopPropagation(); setSelectedAnnotationId(annotation.id) }}
+                  onKeyDown={(e) => handleSelectableAnnotationKeyDown(e, annotation.id)}
                   className={cn("absolute", isSelected && "ring-2 ring-primary/60")}
                   style={{ ...baseStyle, backgroundColor: annotation.color }}
                 >
@@ -503,6 +528,7 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
                   onPointerMove={moveOverlayInteraction}
                   onPointerUp={endOverlayInteraction}
                   onClick={(e) => { e.stopPropagation(); setSelectedAnnotationId(annotation.id) }}
+                  onKeyDown={(e) => handleSelectableAnnotationKeyDown(e, annotation.id)}
                   className={cn("absolute border-2", isSelected && "ring-2 ring-primary/60")}
                   style={{ ...baseStyle, borderColor: annotation.color }}
                 >
@@ -523,6 +549,7 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
                   onPointerMove={moveOverlayInteraction}
                   onPointerUp={endOverlayInteraction}
                   onClick={(e) => { e.stopPropagation(); setSelectedAnnotationId(annotation.id) }}
+                  onKeyDown={(e) => handleSelectableAnnotationKeyDown(e, annotation.id)}
                   className={cn("absolute rounded-full border-2", isSelected && "ring-2 ring-primary/60")}
                   style={{ ...baseStyle, borderColor: annotation.color }}
                 >
@@ -545,6 +572,7 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
                   onPointerUp={isEditing ? undefined : endOverlayInteraction}
                   onClick={isEditing ? undefined : (e) => { e.stopPropagation(); setSelectedAnnotationId(annotation.id) }}
                   onDoubleClick={isEditing ? undefined : (e) => { e.stopPropagation(); startInlineEdit(annotation.id, annotation.text) }}
+                  onKeyDown={isEditing ? undefined : (e) => handleTextAnnotationKeyDown(e, annotation)}
                   className={cn(
                     "absolute rounded-sm px-1.5 py-1 leading-snug",
                     isSelected && !isEditing && "ring-2 ring-primary/60",
@@ -616,6 +644,7 @@ export function PageCanvasItem({ page, pageIndex, pageNumber, totalPages }: Page
                 onPointerMove={moveOverlayInteraction}
                 onPointerUp={endOverlayInteraction}
                 onClick={(e) => { e.stopPropagation(); setSelectedAnnotationId(annotation.id) }}
+                onKeyDown={(e) => handleSelectableAnnotationKeyDown(e, annotation.id)}
                 className={cn("absolute overflow-hidden rounded-sm", isSelected && "ring-2 ring-primary/60")}
                 style={baseStyle}
               >
