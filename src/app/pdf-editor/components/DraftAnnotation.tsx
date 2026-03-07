@@ -47,14 +47,28 @@ export function DraftAnnotation({ annotation }: { annotation: PdfAnnotation }) {
   }
 
   if ("x" in annotation) {
+    if (annotation.type === "ellipse") {
+      return (
+        <ellipse
+          cx={`${(annotation.x + annotation.width / 2) * 100}%`}
+          cy={`${(annotation.y + annotation.height / 2) * 100}%`}
+          rx={`${(annotation.width / 2) * 100}%`}
+          ry={`${(annotation.height / 2) * 100}%`}
+          fill="transparent"
+          fillOpacity={0}
+          stroke={annotation.color}
+          strokeWidth={annotation.strokeWidth}
+          strokeDasharray="5 4"
+        />
+      )
+    }
+
     return (
       <rect
         x={`${annotation.x * 100}%`}
         y={`${annotation.y * 100}%`}
         width={`${annotation.width * 100}%`}
         height={`${annotation.height * 100}%`}
-        rx={annotation.type === "ellipse" ? 999 : 0}
-        ry={annotation.type === "ellipse" ? 999 : 0}
         fill={annotation.type === "highlight" ? annotation.color : "transparent"}
         fillOpacity={annotation.type === "highlight" ? annotation.opacity : 0}
         stroke={annotation.type === "highlight" ? "none" : annotation.color}
