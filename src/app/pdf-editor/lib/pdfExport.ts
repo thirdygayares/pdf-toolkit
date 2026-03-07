@@ -230,9 +230,18 @@ export function toRgb(color: string) {
 }
 
 async function fetchImageBytes(src: string) {
-  const response = await fetch(src)
-  const arrayBuffer = await response.arrayBuffer()
-  return new Uint8Array(arrayBuffer)
+  try {
+    const response = await fetch(src)
+    if (!response.ok) {
+      throw new Error(`received ${response.status} ${response.statusText}`.trim())
+    }
+
+    const arrayBuffer = await response.arrayBuffer()
+    return new Uint8Array(arrayBuffer)
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    throw new Error(`Failed to fetch image bytes for ${src}: ${message}`)
+  }
 }
 
 async function fetchImageBytesForPdf(src: string): Promise<{ kind: "png" | "jpg"; bytes: Uint8Array }> {
