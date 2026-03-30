@@ -36,12 +36,6 @@ export default function Head() {
                     __html: JSON.stringify(siteSchema),
                 }}
             />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(orgSchema),
-                }}
-            />
         </>
     );
 }
