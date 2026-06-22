@@ -257,7 +257,7 @@ async function loadPdfModule(): Promise<PdfModuleWithInternals> {
     }
 
     const pdfJsModule = (await import("pdfjs-dist/build/pdf")) as PdfModuleWithInternals;
-    pdfJsModule.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
+    pdfJsModule.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
     cachedPdfModule = pdfJsModule;
     return pdfJsModule;
 }
