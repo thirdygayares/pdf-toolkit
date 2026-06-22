@@ -125,6 +125,14 @@ export const tools: Tool[] = [
     href: "/pdf-overlay",
 
   },
+  {
+    id: "compare-pdf",
+    name: "Compare PDF",
+    description: "Compare two PDFs side by side with added and removed text highlighted on the page, plus scroll sync, zoom, and jump-to-difference.",
+    icon: "GitCompareArrows",
+    available: true,
+    href: "/compare-pdf",
+  },
 
 
 
