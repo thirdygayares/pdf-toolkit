@@ -89,7 +89,7 @@ export const SplitGrid = ({
         ;(async () => {
             try {
                 const pdfModule = await import("pdfjs-dist/build/pdf")
-                pdfModule.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js"
+                pdfModule.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs"
 
                 const bytes = await file.arrayBuffer()
                 const task = pdfModule.getDocument({ data: bytes })

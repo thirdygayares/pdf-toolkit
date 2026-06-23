@@ -8,7 +8,7 @@ declare module "pdfjs-dist/build/pdf" {
     export function getDocument(src: unknown): PDFDocumentLoadingTask;
 }
 
-declare module "pdfjs-dist/build/pdf.worker.min.js?url" {
+declare module "pdfjs-dist/build/pdf.worker.min.mjs?url" {
     const src: string;
     export default src;
 }
