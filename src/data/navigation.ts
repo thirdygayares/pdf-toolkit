@@ -20,6 +20,7 @@ export const navigation: NavigationItem[] = [
             { name: "Flow Builder", href: "/flow-builder" },
             { name: "Compress PDF", href: "/compress-pdf" },
             { name: "PDF Editor", href: "/pdf-editor" },
+            { name: "Compare PDF", href: "/compare-pdf" },
 
            { name: "Convert PDF", href: "#" },
             { name: "Protect PDF", href: "#" },
