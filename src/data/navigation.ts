@@ -21,6 +21,8 @@ export const navigation: NavigationItem[] = [
             { name: "Compress PDF", href: "/compress-pdf" },
             { name: "PDF Editor", href: "/pdf-editor" },
             { name: "Compare PDF", href: "/compare-pdf" },
+            { name: "Sign PDF", href: "/sign-pdf" },
+            { name: "Compare PDF", href: "/compare-pdf" },
 
            { name: "Convert PDF", href: "#" },
             { name: "Protect PDF", href: "#" },

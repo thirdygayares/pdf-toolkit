@@ -133,6 +133,14 @@ export const tools: Tool[] = [
     available: true,
     href: "/compare-pdf",
   },
+  {
+    id: "sign-pdf",
+    name: "Sign PDF",
+    description: "Add a signature, initials, or company stamp to a PDF. Type, draw, or upload your mark, place and resize it on any page, then download the signed file.",
+    icon: "PenTool",
+    available: true,
+    href: "/sign-pdf",
+  },
 
 
 
